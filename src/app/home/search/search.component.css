@@ -1,0 +1,41 @@
+.my-img-carousel{
+  z-index: -1;
+}
+#searchFood{
+  padding-bottom: 50px;
+  color:white;
+  text-align:center;
+  z-index: 2;
+  position: absolute;
+  top: 20%;
+}
+
+#searchFood > h1{
+  padding: 20px;
+}
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+.title-border{
+  font-weight: bold;
+  font-size: 50px;
+
+}
+.carousel-item {
+  height: 400px;
+}
+.fix-icon{
+  height: calc(1.5em + .75rem + 2px);
+}
+.search-icon{
+  background-color: white;
+  border-width: 0px;
+  border-radius: 24px 0px 0px 24px;
+}
+.search-button{
+  background-color: #BB3127;
+}
+.my-btn{
+  border-radius: 24px 24px 24px 24px;
+  border: 0px;
+}

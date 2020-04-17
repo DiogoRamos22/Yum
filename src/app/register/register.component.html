@@ -1,0 +1,133 @@
+<div class="w-100 h-100 p-0 m-0">
+  <app-nav-bar></app-nav-bar>
+  <div class="row m-0">
+    <div class="col-sm-6 pl-0 pr-0 ml-0 mr-0">
+      <div class="figure register-img">
+        <img class="figure-img img-fluid register-img mb-0" src="../../../assets/imgs/register.png">
+      </div>
+    </div>
+    <div class="col-sm-6 pl-0 pr-0 ml-0 mr-0">
+      <div class="container h-80">
+        <div class="d-flex justify-content-center h-100">
+          <div class="user-card mt-5">
+            <div class="form p-5 pb-5 text-center">
+              <h2 class="roboto mt-5">Create your free account</h2>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <h4 class="mt-5 roboto separator"><hr/>Personal Information<hr/></h4>
+                <div class="form-row">
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="Name*" name="Name" id="name" formControlName="firstName">
+                  </div>
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="Last Name*" name="LastName" id="lastname" formControlName="lastName">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group col-md-6">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                          <fa-icon [icon]="faUser"></fa-icon>
+                        </div>
+                      </div>
+                      <input required placeholder="Date of birth*" class="user-box mt-4 mb-3 my-btn form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date"  name="birth" formControlName="birth"/>
+                    </div>
+                    <div class="input-group col-md-6">
+                      <select id="gender" class="user-box mt-4 mb-3 my-btn form-control" name="gender" formControlName="gender">
+                        <option disabled selected hidden>Gender*</option>
+                        <option *ngFor="let gender of genders" [value]="gender" aria-required="true">{{gender}}</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-group col-md-12">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="Address*" name="Address" id="address" formControlName="address">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="District*" name="District" id="district" formControlName="district">
+                  </div>
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="County*" name="County" id="county" formControlName="county">
+                  </div>
+                </div>
+                <h4 class="mt-4 roboto separator"><hr/>Account Information<hr/></h4>
+                <div class="form-row">
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-4 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-4 mb-3 my-btn form-control" type="text" placeholder="Nickname*" name="Nickname" id="nickname" formControlName="nickname">
+                  </div>
+                  <div class="input-group col-md-6">
+                    <select id="type" class="user-box mt-4 mb-3 my-btn form-control" name="type" formControlName="type">
+                      <option disabled selected hidden>Type of Account*</option>
+                      <option *ngFor="let userType of userTypes" [value]="userType" aria-required="true">{{userType}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
+                      <fa-icon [icon]="faEnvelope"></fa-icon>
+                    </div>
+                  </div>
+                  <input required class="user-box mt-3 mb-3 my-btn form-control" type="email" placeholder="E-mail*" name="Email" id="email" formControlName="email">
+                </div>
+                <div class="form-row">
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faLock"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-3 mb-3 my-btn form-control" type="password" placeholder="Password*" name="Password" id="password" formControlName="password">
+                  </div>
+                  <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
+                        <fa-icon [icon]="faLock"></fa-icon>
+                      </div>
+                    </div>
+                    <input required class="user-box mt-3 mb-3 my-btn form-control" type="password" placeholder="Confirm Password*" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword">
+                  </div>
+                </div>
+                <button [disabled]="loading" class="mt-4 p-2 pr-3 pl-3 button-box btn my-btn text-white" type="submit">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Create Account
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

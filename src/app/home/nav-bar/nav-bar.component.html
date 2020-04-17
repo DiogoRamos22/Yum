@@ -1,0 +1,18 @@
+<div class="navbar sticky-top navbar-expand-md navbar-dark my-bg text-white container-10-height">
+  <ul class="navbar-nav form-inline m-auto">
+      <li>
+      <a class="navbar-brand" href="#"><img class="logo" src="../../../assets/imgs/yum_bee.png" alt=""></a>
+      </li>
+      <li>
+      <h5 class="navbar-text m-2 text-white montserrat navbar-collapse">The best homemade food</h5>
+      </li>
+  </ul>
+  <!-- Lado esquerdo na navbar-->
+  <div class="navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <div *ngIf="isLogged; then loggedIn else loggedOut"></div>
+        <ng-template #loggedIn><app-logged-in class="container-sm"></app-logged-in></ng-template>
+        <ng-template #loggedOut><app-logged-out class="container-sm"></app-logged-out></ng-template>
+      </ul>
+  </div>
+</div>
