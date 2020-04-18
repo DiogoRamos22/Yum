@@ -1,41 +1,43 @@
-<div class="w-100 h-100 p-0 m-0">
-  <app-nav-bar></app-nav-bar>
-  <div class="container h-80">
-    <div class="d-flex justify-content-center h-100">
-      <div class="user-card mt-5">
-        <div class="form p-5 text-center">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <h2 class="roboto">Sign In</h2>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
-                  <fa-icon [icon]="faEnvelope"></fa-icon>
+
+  <div class="w-100 h-100 p-0 m-0">
+    <app-nav-bar></app-nav-bar>
+    <div class="container h-80">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user-card mt-5">
+          <div class="form p-5 text-center">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <h2 class="roboto">Sign In</h2>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                  </div>
+                </div>
+                <input class="user-box mt-3 mb-3 my-btn form-control" type="email" placeholder="E-mail" name="Email" id="email" formControlName="email">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">email is required</div>
                 </div>
               </div>
-              <input class="user-box mt-3 mb-3 my-btn form-control" type="email" placeholder="E-mail" name="Email" id="email" formControlName="email">
-              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">email is required</div>
-              </div>
-            </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
-                  <fa-icon [icon]="faLock"></fa-icon>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text fix-icon mt-3 mb-3 icon-box pr-1">
+                    <fa-icon [icon]="faLock"></fa-icon>
+                  </div>
+                </div>
+                <input class="user-box mt-3 mb-3 my-btn form-control" type="password" placeholder="Password" name="Password" id="password"  formControlName="password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
                 </div>
               </div>
-              <input class="user-box mt-3 mb-3 my-btn form-control" type="password" placeholder="Password" name="Password" id="password"  formControlName="password">
-              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
-              </div>
-            </div>
-            <button [disabled]="loading" class="mt-4 button-box btn my-btn text-white" type="submit">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Sign In
-            </button>
-            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-          </form>
+              <button [disabled]="loading" class="mt-4 button-box btn my-btn text-white" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Sign In
+              </button>
+              <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+

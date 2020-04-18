@@ -1,0 +1,56 @@
+.h-80{
+  height: 72.5vh;
+}
+.user-card{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 610px;
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-direction: column;
+}
+.user-box{
+  /*border-width: 2px 2px 2px 0px !important;
+  border-style: solid !important;
+  border-color: #313131 !important;
+  box-shadow: inset !important;*/
+  background-color: rgb(247, 244, 243);
+}
+.user-box:focus{
+  background-color: rgb(247, 244, 243) !important;
+}
+.button-box{
+  /*
+  border-width: 2px 2px 2px 2px;
+  border-style: solid;
+  border-color: #313131;*/
+  background-color: #BB3127;
+  font-weight: bold;
+}
+.icon-box{
+  border-width: 0px 0px 0px 0px ;
+  /*
+  border-style: solid ;
+  border-color: #313131 ;*/
+  border-radius: 24px 0px 0px 24px;
+  background-color: rgb(247, 244, 243);
+}
+.fix-icon{
+  height: calc(1.5em + .75rem + 2px);
+}
+input, textarea {
+  outline: none;
+  box-shadow:none !important;
+}
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+.my-btn{
+  border-radius: 24px 24px 24px 24px;
+  border: 0px;
+}
+html, body {
+  height: 100vh;
+}
