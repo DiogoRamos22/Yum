@@ -1,61 +1,110 @@
-import { Injectable, ReflectiveInjector } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import axios, { AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError } from 'axios';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
-  LARAVEL_PHP_API_SERVER = 'http://f3baf686.ngrok.io';
 
-  loginUser(user: string) {
-    return this.httpClient.post<any>(`${this.LARAVEL_PHP_API_SERVER}/api/auth/login?` + user, {});
+  LARAVEL_PHP_API_SERVER = 'http://yum-app.online'
+
+  config: AxiosRequestConfig = {
+    baseURL: 'http://yum-app.online/',
+    timeout: 10000,
+    responseType: 'json',
+    validateStatus: (status: number) => status >= 200 && status < 300,
+    maxRedirects: 5
+  };
+
+  handleResponse = (response: AxiosResponse) => response.data;
+
+  handleError = (error: AxiosError) => error;
+
+  loginUser(email: string, password: string) {
+    return axios.post('/api/auth/login', { email, password}, this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
   }
 
-  registerUser(user: string): Observable<any> {
-    return this.httpClient.post<any>(`${this.LARAVEL_PHP_API_SERVER}/api/auth/signup?` + user, {});
-  }
-
-  upload(uploadData) {
-    const token = this.getToken();
-    console.log(uploadData)
-    return this.httpClient.post(`${this.LARAVEL_PHP_API_SERVER}/api/updateAvatar`, {avatar: uploadData}, {headers: token});
+  registerUser(data: JSON) {
+    return axios.post('/api/auth/signup', data , this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
   }
 
   logoutUser() {
     const token = this.getToken();
-    return this.httpClient.post<any>(`${this.LARAVEL_PHP_API_SERVER}/api/auth/logout`, {}, {headers: token});
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/auth/logout', {}, this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
   }
 
-  meUser(): Observable<any> {
+  meUser() {
     const token = this.getToken();
     if (token != null) {
-      return this.httpClient.get<any>(`${this.LARAVEL_PHP_API_SERVER}/api/auth/me`, {headers: token});
+      this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+      return axios.get('/api/auth/me', this.config)
+        .then(this.handleResponse)
+        .catch(this.handleError);
     }
   }
-  getAvatar(): Observable<any> {
-    const token = this.getToken();
-    return this.httpClient.get<any>(`${this.LARAVEL_PHP_API_SERVER}/api/avatar`, {headers: token})
-  }
 
-  adminUser(): Observable<any> {
+  uploadAvatar(avatar) {
     const token = this.getToken();
-    return this.httpClient.get<any>(`${this.LARAVEL_PHP_API_SERVER}/api/admin/isAdmin`, { headers: token });
-  }
-
-  AllUser(): Observable<any> {
-    const token = this.getToken();
-    return this.httpClient.get(`${this.LARAVEL_PHP_API_SERVER}/api/admin/GetAllUsers`, {headers: token});
-  }
-
-  constructor(private httpClient: HttpClient) { }
-  getToken(): HttpHeaders {
-    const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
-    const reqHeader = new HttpHeaders({
+    this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + currentUserLocal.token
-   });
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/updateAvatar', { avatar }, this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
+  }
 
-    return reqHeader;
+  getAvatar() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/avatar', this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
+  }
+
+  adminUser() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/admin/isAdmin', this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
+  }
+
+  AllUser() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/admin/GetAllUsers', this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
+  }
+
+  getToken(): string {
+    const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUserLocal.token;
   }
 }

@@ -53,12 +53,13 @@ export class LoginComponent implements OnInit {
 
       this.loading = true;
       this.authenticationService.login(this.f.email.value, this.f.password.value)
-      .then(
-        (res) => {
+      .then( res => {
           this.router.navigate([this.returnUrl]);
-        }
-        ).catch(err => {
+      })
+      .catch( err => {
+          this.submitted = false;
+          this.loading = false;
           console.log(err);
-        });
+      });
   }
 }

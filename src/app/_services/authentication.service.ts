@@ -20,31 +20,36 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
     login(email: string, password: string) {
-      // tslint:disable-next-line: prefer-const
-      let promise = new Promise((resolve, reject) =>{
-        return this.http.post<any>(`http://f3baf686.ngrok.io/api/auth/login?email=${email}&password=${password}`, {  })
-          .toPromise().then(
-            res => {
-              const reqHeader = new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + res.token
-             });
-              this.http.get<any>(`http://f3baf686.ngrok.io/api/auth/me`, {headers: reqHeader}).toPromise().then(
-                user => {
-                  user.token = res.token;
-                  if (user && user.token) {
-                      // store user details and jwt token in local storage to keep user logged in between page refreshes
-                      localStorage.setItem('currentUser', JSON.stringify(user));
-                      this.currentUserSubject.next(user);
-                      this.results = user;
-                  }
+      let promise = new Promise(( resolve, reject ) => {
+        this.userApi.loginUser(email, password)
+          .then( res => {
+            localStorage.setItem('currentUser', JSON.stringify(res));
+            this.userApi.meUser()
+              .then( user => {
+                user.token = res.token;
+                if (user && user.token) {
+                  localStorage.removeItem('currentUser');
+                  localStorage.setItem('currentUser', JSON.stringify(user));
+                  this.currentUserSubject.next(user);
+                  this.results = user;
                   resolve(this.results);
                   return user;
+                } else {
+                  reject('Error.');
                 }
-              );
-            });
+              })
+              .catch(err => {
+                reject('Failed to retreive user info');
+                console.log(err);
+              });
+          })
+          .catch( err => {
+            reject('Failed to Authenticate');
+            console.log(err);
+          });
       });
       return promise;
+
     }
     register(
       firstName: string,
@@ -59,12 +64,27 @@ export class AuthenticationService {
       email: string,
       password: string
       ) {
-        let promise = new Promise((resolve, reject) => {
-          // tslint:disable-next-line: max-line-length
-          const registerInfo = `type=${type}&firstName=${firstName}&lastName=${lastName}&birth=${birth}&gender=${gender}&address=${address}&district=${district}&county=${county}&nickname=${nickname}&email=${email}&password=${password}`;
-          return this.userApi.registerUser(registerInfo).toPromise().then(res => {
-            resolve(res)
-          })
+        let promise = new Promise(( resolve, reject ) => {
+          const registerInfo: JSON = {
+            firstName,
+            lastName,
+            birth,
+            gender,
+            address,
+            district,
+            county,
+            nickname,
+            type,
+            email,
+            password
+          } as unknown as JSON;
+          return this.userApi.registerUser(registerInfo)
+            .then( res => {
+              resolve(res);
+            })
+            .catch( err => {
+              reject('Registration Failed');
+            });
         });
         return promise;
       }

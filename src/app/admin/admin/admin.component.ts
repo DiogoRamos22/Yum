@@ -24,15 +24,18 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.loading = false;
-      this.users = users;
-      this.dataSource = new MatTableDataSource(users);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-
-    });
+    this.userService.getAll()
+      .then(users => {
+        this.loading = false;
+        this.users = users;
+        this.dataSource = new MatTableDataSource(users);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+      .catch( err => {
+        this.loading = false;
+        console.log(err);
+      });
   }
 
   applyFilter(event: Event) {

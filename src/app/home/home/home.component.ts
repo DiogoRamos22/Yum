@@ -3,7 +3,6 @@ import { first } from 'rxjs/operators';
 
 import { User } from '../../_models/user';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { UserService } from "../../_services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -16,13 +15,11 @@ export class HomeComponent {
     userFromApi: User;
     isLogged = true;
 
-    constructor(
-        private userService: UserService,
-        private authenticationService: AuthenticationService
-    ) {
-        this.currentUser = this.authenticationService.currentUserValue;
+    constructor( private authenticationService: AuthenticationService) {
+      this.currentUser = this.authenticationService.currentUserValue;
     }
 
+    // tslint:disable-next-line: use-lifecycle-interface
     ngOnInit() {
         this.loading = true;
     }

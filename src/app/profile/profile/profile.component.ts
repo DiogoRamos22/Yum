@@ -22,21 +22,25 @@ export class ProfileComponent implements OnInit {
   email: string;
 
   constructor(private api: ApiService) {
-    api.getAvatar().subscribe(res => {
-      this.imgUrl = res.image;
-      this.currentUserLocal = JSON.parse(localStorage.getItem('currentUser'))
-      this.firstName = this.currentUserLocal.firstName;
-      this.lastName = this.currentUserLocal.lastName;
-      this.birth = this.currentUserLocal.birth;
-      this.gender = this.currentUserLocal.gender;
-      this.address = this.currentUserLocal.address;
-      this.district = this.currentUserLocal.district;
-      this.county = this.currentUserLocal.county;
-      this.nickname = this.currentUserLocal.nickname;
-      this.email = this.currentUserLocal.email;
+    api.getAvatar()
+      .then(res => {
+        this.imgUrl = res.image;
+        this.currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
+        this.firstName = this.currentUserLocal.firstName;
+        this.lastName = this.currentUserLocal.lastName;
+        this.birth = this.currentUserLocal.birth;
+        this.gender = this.currentUserLocal.gender;
+        this.address = this.currentUserLocal.address;
+        this.district = this.currentUserLocal.district;
+        this.county = this.currentUserLocal.county;
+        this.nickname = this.currentUserLocal.nickname;
+        this.email = this.currentUserLocal.email;
 
 
-    });
+      })
+      .catch( err => {
+        console.log(err);
+      });
    }
 
   ngOnInit(): void {
