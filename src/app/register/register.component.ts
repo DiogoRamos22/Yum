@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faUser,  faEnvelope,  faLock } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../_services/authentication.service';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [SnackBarComponent]
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -25,7 +27,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private snackBar: SnackBarComponent
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
+      this.snackBar.openSnackBar('Form invalid', "Dismiss", 2000);
       return;
     }
     if (this.f.password.value === this.f.confirmPassword.value) {
@@ -71,6 +75,7 @@ export class RegisterComponent implements OnInit {
         this.f.password.value)
         .then( res => {
           this.router.navigate([this.returnUrl]);
+          this.snackBar.openSnackBar('Registered successfully, redirecting...', "Dismiss", 2000);
         })
         .catch( err => console.log(err));
     }

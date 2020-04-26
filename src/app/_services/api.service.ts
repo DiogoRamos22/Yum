@@ -9,7 +9,7 @@ import axios, { AxiosRequestConfig,
 
 export class ApiService {
 
-  LARAVEL_PHP_API_SERVER = 'http://yum-app.online'
+  LARAVEL_PHP_API_SERVER = 'http://yum-app.online/'
 
   config: AxiosRequestConfig = {
     baseURL: 'http://yum-app.online/',

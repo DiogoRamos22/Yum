@@ -27,6 +27,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { FoodtableComponent } from './food/foodtable/foodtable.component'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { FoodtableComponent } from './food/foodtable/foodtable.component'
     RegisterComponent,
     ProfileComponent,
     routingComponents,
-    FoodtableComponent
+    FoodtableComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { FoodtableComponent } from './food/foodtable/foodtable.component'
     MatSortModule,
     MatGridListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
 
   ],
   providers: [
