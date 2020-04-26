@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -9,15 +10,20 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl }
 })
 export class SearchComponent implements OnInit {
   faSearch = faSearch;
+  searchForm: FormGroup;
 
-  searchGroup = new FormGroup({
-    search: new FormControl('')
-  });
+  get f() { return this.searchForm.controls; }
 
-  constructor() {
+  constructor(private router: Router, private formBuilder: FormBuilder) {
    }
 
   ngOnInit(): void {
+    this.searchForm = this.formBuilder.group({
+      search: ['']
+    });
   }
 
+  search() {
+    this.router.navigate(['/food'], { queryParams: { search: this.f.search.value } });
+  }
 }

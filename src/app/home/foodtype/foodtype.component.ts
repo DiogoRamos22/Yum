@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-foodtype',
@@ -9,7 +10,7 @@ export class FoodtypeComponent implements OnInit {
   breakpoint: number;
   height: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if (window.innerWidth <= 1300) {
@@ -51,6 +52,9 @@ export class FoodtypeComponent implements OnInit {
       this.height = 400;
 
     }
+  }
+  redirect(typeFood) {
+    this.router.navigate(['/food'], { queryParams: { search: typeFood } });
   }
 
 }

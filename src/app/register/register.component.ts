@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faUser,  faEnvelope,  faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../_services/authentication.service';
 import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 

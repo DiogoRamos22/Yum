@@ -16,7 +16,7 @@
     </div>
       <div class="container-fluid align-middle" id="searchFood">
         <h1 class="title-border roboto">Find food near you</h1>
-        <form class="form-inline mt-auto" [formGroup]="searchGroup">
+        <form class="form-inline mt-auto" [formGroup]="searchForm">
           <div class="m-auto w-50">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -26,7 +26,7 @@
               </div>
               <input id="m-80" class="mt-3 mb-3 my-btn form-control" type="text" placeholder="Search" name="Search" id="" formControlName="search">
             </div>
-            <button mat-button type="button" class="btn shadow search-button p-1 pl-4 pr-4 my-btn text-white">Find Food</button>
+            <button mat-button type="button" class="btn shadow search-button p-1 pl-4 pr-4 my-btn text-white" (click)="search()">Find Food</button>
           </div>
         </form>
         </div>
