@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 export interface UserData {
   id: string;
   name: string;
@@ -10,73 +11,41 @@ export interface UserData {
   color: string;
   price: number;
 }
-
 @Component({
-  selector: 'app-foodtable',
-  templateUrl: './foodtable.component.html',
-  styleUrls: ['./foodtable.component.scss']
+  selector: 'app-admin-food',
+  templateUrl: './admin-food.component.html',
+  styleUrls: ['./admin-food.component.css']
 })
-export class FoodtableComponent implements OnInit {
-  users = Array.from({length: 50}, (_, k) => createNewUser(k + 1));
-  search: string;
-  breakpoint: number;
-  height: number;
+export class AdminFoodComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  displayedColumns: string[] = ['id', 'name', 'area', 'foodName', 'avaiableQuantity', 'price'];
 
+  dataSource: MatTableDataSource<UserData>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor() {
+    // Create 100 users
+  const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+
+  // Assign the data to the data source for the table to render
+  this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit(): void {
-
-    this.route.queryParams
-      .subscribe(params => {
-        this.search = params.search;
-      });
-
-    if (window.innerWidth <= 1300) {
-        if (window.innerWidth <= 750) {
-          if (window.innerWidth <= 500) {
-            this.breakpoint = 1;
-            this.height = 500;
-          } else {
-            this.breakpoint = 2;
-            this.height = 425;
-          }
-        } else {
-          this.breakpoint = 3;
-          this.height = 450;
-        }
-      } else {
-        this.breakpoint = 4;
-        this.height = 500;
-      }
-
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
-  onResize(event) {
-    if (event.target.innerWidth <= 1300) {
-      if (event.target.innerWidth <= 750) {
-        if (event.target.innerWidth <= 500) {
-          this.breakpoint = 1;
-          this.height = 500;
-        } else {
-          this.breakpoint = 2;
-          this.height = 450;
-        }
-      } else {
-        this.breakpoint = 3;
-        this.height = 450;
-      }
-    } else {
-      this.breakpoint = 4;
-      this.height = 500;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
-  buyFood(id) {
-    this.router.navigate(['/food/buy'], { queryParams: { foodId: id } });
-  }
 }
-
 /** Builds and returns a new User. */
 function createNewUser(num: number) {
   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
@@ -94,7 +63,7 @@ function createNewUser(num: number) {
     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
     price
   };
-}
+  }
 
 
   // Parte da tabela

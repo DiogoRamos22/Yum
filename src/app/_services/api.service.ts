@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import axios, { AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
-
-  LARAVEL_PHP_API_SERVER = 'http://yum-app.online/'
 
   config: AxiosRequestConfig = {
     baseURL: 'http://yum-app.online/',

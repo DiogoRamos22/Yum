@@ -12,6 +12,7 @@ import { User } from './_models/user';
 })
 export class AppComponent {
   currentUser: User;
+  title = 'yum';
 
   constructor(
       private router: Router,

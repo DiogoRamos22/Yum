@@ -7,11 +7,11 @@ import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
   selector: 'app-logged-in',
   templateUrl: './logged-in.component.html',
   styleUrls: ['./logged-in.component.css'],
-  providers:[SnackBarComponent]
+  providers: [SnackBarComponent]
 })
 export class LoggedInComponent implements OnInit {
   constructor(
-    private auth: AuthenticationService, 
+    private auth: AuthenticationService,
     private router: Router,
     private snackBar: SnackBarComponent
     ) { }
@@ -20,7 +20,7 @@ export class LoggedInComponent implements OnInit {
   }
 
   logout() {
-    this.snackBar.openSnackBar('Signing out...', "Dismiss", 1000);
+    this.snackBar.openSnackBar('Signing out...', 'Dismiss', 1000);
     this.auth.logout();
     this.router.navigate(['/login']);
   }

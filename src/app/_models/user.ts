@@ -1,5 +1,4 @@
 import { Role } from './role';
-import { FormGroup } from "@angular/forms";
 
 export class User {
     id: number;

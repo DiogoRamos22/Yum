@@ -50,17 +50,6 @@ export class ProfileComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
   onUpload() {
-    /* uploadData continua empty apesar de darmos append a imagem até mesmo em base64
-    const uploadData = new FormData();
-    const reader = new FileReader();
-    reader.onload = e => this.BselectedFile = reader.result.toString();
-    reader.readAsDataURL(this.selectedFile);
 
-    uploadData.append('image', this.BselectedFile)
-    console.log(uploadData)
-    this.api.upload(uploadData).subscribe( res => {
-      console.log(res);
-    });
-    */
   }
 }

@@ -20,6 +20,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
     login(email: string, password: string) {
+      // tslint:disable-next-line: prefer-const
       let promise = new Promise(( resolve, reject ) => {
         this.userApi.loginUser(email, password)
           .then( res => {
@@ -64,6 +65,7 @@ export class AuthenticationService {
       email: string,
       password: string
       ) {
+        // tslint:disable-next-line: prefer-const
         let promise = new Promise(( resolve, reject ) => {
           const registerInfo: JSON = {
             firstName,

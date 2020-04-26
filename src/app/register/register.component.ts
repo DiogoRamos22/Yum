@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   faUser = faUser;
   faEnvelope = faEnvelope;
   faLock = faLock;
-  userTypes = ['Client', 'Vendor', 'Both']
+  userTypes = ['Client', 'Vendor', 'Both'];
   genders = ['Female', 'Male', 'Rather not say'];
 
   constructor(
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
-      this.snackBar.openSnackBar('Form invalid', "Dismiss", 2000);
+      this.snackBar.openSnackBar('Form invalid', 'Dismiss', 2000);
       return;
     }
     if (this.f.password.value === this.f.confirmPassword.value) {
@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
         this.f.password.value)
         .then( res => {
           this.router.navigate([this.returnUrl]);
-          this.snackBar.openSnackBar('Registered successfully, redirecting...', "Dismiss", 2000);
+          this.snackBar.openSnackBar('Registered successfully, redirecting...', 'Dismiss', 2000);
         })
         .catch( err => console.log(err));
     }
