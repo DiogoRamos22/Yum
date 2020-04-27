@@ -1,14 +1,12 @@
 <app-nav-bar></app-nav-bar>
-<!-- upload nao funciona problemas com FormData ver profile.component.ts
-  <input
-    style="display: none"
-    type="file" (change)="onFileChanged($event)"
-    #fileInput>
-  <button (click)="fileInput.click()">Select File</button>
-  <button (click)="onUpload()">Upload!</button>
--->
-  <div class="card m-auto" style="width: 18rem;">
-    <img class="card-img-top" [src]=imgUrl alt="Card image cap">
+  <div class="card m-auto" style="width: 20rem;">
+    <div>
+      <img class="card-img-top" [src]=imgUrl alt="Card image cap">
+      <span>
+        <input type="file" (change)="onFileSelected($event)" style="width: 76%;">
+        <button (click)="update()" [disabled]="!selectedFile">Update</button>
+      </span>
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{firstName}} {{lastName}}</h5>
     </div>

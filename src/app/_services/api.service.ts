@@ -7,8 +7,10 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 export class ApiService {
 
+  LARAVEL_PHP_API_SERVER = 'http://127.0.0.1:8000/'
+
   config: AxiosRequestConfig = {
-    baseURL: 'http://yum-app.online/',
+    baseURL: 'http://127.0.0.1:8000/',
     timeout: 10000,
     responseType: 'json',
     validateStatus: (status: number) => status >= 200 && status < 300,
@@ -57,11 +59,13 @@ export class ApiService {
 
   uploadAvatar(avatar) {
     const token = this.getToken();
+    const formData = new FormData();
+    formData.append('avatar', avatar);
     this.config.headers = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       Authorization: 'Bearer ' + token
     };
-    return axios.post('/api/updateAvatar', { avatar }, this.config)
+    return axios.post('/api/updateAvatar', formData, this.config)
       .then(this.handleResponse)
       .catch(this.handleError);
   }
@@ -103,4 +107,24 @@ export class ApiService {
     const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
     return currentUserLocal.token;
   }
+
+  addDish(img, type, name, ingredients, number, date, price) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('img', img);
+    formData.append('type', type);
+    formData.append('name', name);
+    formData.append('ingredients', ingredients);
+    formData.append('number', number);
+    formData.append('date', date);
+    formData.append('price', price);
+    this.config.headers = {
+      'Content-Type': 'multipart/form-data',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/addDish', formData, this.config)
+      .then(this.handleResponse)
+      .catch(this.handleError);
+  }
+
 }

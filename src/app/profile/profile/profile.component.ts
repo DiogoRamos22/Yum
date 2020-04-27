@@ -38,18 +38,34 @@ export class ProfileComponent implements OnInit {
 
 
       })
-      .catch( err => {
+      .catch(err => {
         console.log(err);
       });
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  onFileChanged(event) {
+  onFileSelected(event) {
     this.selectedFile = event.target.files[0];
   }
-  onUpload() {
 
+  update() {
+    if (this.selectedFile) {
+      this.api.uploadAvatar(this.selectedFile)
+        .then(res => {
+          console.log(res);
+          this.api.getAvatar()
+            .then(res => {
+              this.imgUrl = res.image;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 }

@@ -33,7 +33,11 @@ import { AdminComponent } from './admin/admin/admin.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminFoodComponent } from './admin/admin-food/admin-food.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
-
+import { MyFoodComponent } from './my-food/my-food.component';
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -54,7 +58,8 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
     SnackBarComponent,
     FoodComponent,
     AdminUsersComponent,
-    AdminFoodComponent
+    AdminFoodComponent,
+    MyFoodComponent
   ],
   imports: [
     BrowserModule,
