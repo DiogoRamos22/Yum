@@ -120,6 +120,15 @@ export class ApiService {
     return axios.get('/api/getUserDishes', this.config);
   }
 
+  getAllHistory() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/getAllHistory', this.config);
+  }
+
   changeType(type) {
     const token = this.getToken();
     const formData = new FormData();
@@ -140,6 +149,18 @@ export class ApiService {
       Authorization: 'Bearer ' + token
     };
     return axios.post('/api/addMoney', formData, this.config);
+  }
+
+  buyDish(id, numberOfDishes) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('dishId', id);
+    formData.append('number', numberOfDishes);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/buyDish', formData, this.config);
   }
 
 
