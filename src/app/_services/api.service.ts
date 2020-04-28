@@ -7,10 +7,8 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 export class ApiService {
 
-  LARAVEL_PHP_API_SERVER = 'http://127.0.0.1:8000/'
-
   config: AxiosRequestConfig = {
-    baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'http://yum-app.online',
     timeout: 10000,
     responseType: 'json',
     validateStatus: (status: number) => status >= 200 && status < 300,
@@ -22,15 +20,11 @@ export class ApiService {
   handleError = (error: AxiosError) => error;
 
   loginUser(email: string, password: string) {
-    return axios.post('/api/auth/login', { email, password}, this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.post('/api/auth/login', { email, password}, this.config);
   }
 
   registerUser(data: JSON) {
-    return axios.post('/api/auth/signup', data , this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.post('/api/auth/signup', data , this.config);
   }
 
   logoutUser() {
@@ -39,9 +33,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.post('/api/auth/logout', {}, this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.post('/api/auth/logout', {}, this.config);
   }
 
   meUser() {
@@ -51,9 +43,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-      return axios.get('/api/auth/me', this.config)
-        .then(this.handleResponse)
-        .catch(this.handleError);
+      return axios.get('/api/auth/me', this.config);
     }
   }
 
@@ -65,9 +55,7 @@ export class ApiService {
       'Content-Type': 'multipart/form-data',
       Authorization: 'Bearer ' + token
     };
-    return axios.post('/api/updateAvatar', formData, this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.post('/api/updateAvatar', formData, this.config);
   }
 
   getAvatar() {
@@ -76,9 +64,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.get('/api/avatar', this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.get('/api/avatar', this.config);
   }
 
   adminUser() {
@@ -87,9 +73,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.get('/api/admin/isAdmin', this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.get('/api/admin/isAdmin', this.config);
   }
 
   AllUser() {
@@ -98,33 +82,58 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.get('/api/admin/GetAllUsers', this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.get('/api/admin/GetAllUsers', this.config);
   }
 
-  getToken(): string {
-    const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
-    return currentUserLocal.token;
-  }
-
-  addDish(img, type, name, ingredients, number, date, price) {
+  addDish(img, type, name, ingredients, numberOfDishes, date, price) {
     const token = this.getToken();
     const formData = new FormData();
     formData.append('img', img);
     formData.append('type', type);
     formData.append('name', name);
     formData.append('ingredients', ingredients);
-    formData.append('number', number);
+    formData.append('number', numberOfDishes);
     formData.append('date', date);
     formData.append('price', price);
     this.config.headers = {
       'Content-Type': 'multipart/form-data',
       Authorization: 'Bearer ' + token
     };
-    return axios.post('/api/addDish', formData, this.config)
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    return axios.post('/api/addDish', formData, this.config);
   }
 
+  getAllDishes() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/getAllDishes', this.config);
+  }
+
+  getUserDishes() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/getUserDishes', this.config);
+  }
+
+  changeType(type) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('newType', type);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/changeType', formData, this.config);
+  }
+
+
+  getToken(): string {
+    const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUserLocal.token;
+  }
 }

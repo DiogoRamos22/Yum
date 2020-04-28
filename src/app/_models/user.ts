@@ -15,4 +15,5 @@ export class User {
     confirmPassword?: string;
     token?: string;
     role: Role;
+    type: string;
 }

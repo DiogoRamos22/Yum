@@ -26,8 +26,8 @@ export class AdminUsersComponent implements OnInit {
     this.userService.getAll()
       .then(users => {
         this.loading = false;
-        this.users = users;
-        this.dataSource = new MatTableDataSource(users);
+        this.users = users.data;
+        this.dataSource = new MatTableDataSource(users.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })

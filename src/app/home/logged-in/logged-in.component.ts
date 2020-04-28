@@ -10,13 +10,19 @@ import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
   providers: [SnackBarComponent]
 })
 export class LoggedInComponent implements OnInit {
+  isVendor = false;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
     private snackBar: SnackBarComponent
-    ) { }
+    ) {
+      if(this.auth.currentUserValue.type === 'Vendor' || this.auth.currentUserValue.type === 'Both') {
+        this.isVendor = true;
+      }
+     }
 
   ngOnInit(): void {
+
   }
 
   logout() {

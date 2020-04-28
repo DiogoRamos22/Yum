@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/_services/api.service';
 import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { AuthenticationService } from '../../_services/authentication.service';
 })
 export class NavBarComponent implements OnInit {
   isLogged = false;
-  constructor(private api: ApiService, private auth: AuthenticationService) {
+  constructor(private auth: AuthenticationService) {
     if (this.auth.currentUserValue) {
       this.isLogged = true;
   }

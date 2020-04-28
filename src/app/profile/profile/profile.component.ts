@@ -7,10 +7,10 @@ import { ApiService } from '../../_services/api.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  currentUserLocal;
   selectedFile: File;
   BselectedFile: string;
   imgUrl: string;
-  currentUserLocal;
   firstName: string;
   lastName: string;
   birth: string;
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   constructor(private api: ApiService) {
     api.getAvatar()
       .then(res => {
-        this.imgUrl = res.image;
+        this.imgUrl = res.data.image;
         this.currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
         this.firstName = this.currentUserLocal.firstName;
         this.lastName = this.currentUserLocal.lastName;
@@ -56,8 +56,8 @@ export class ProfileComponent implements OnInit {
         .then(res => {
           console.log(res);
           this.api.getAvatar()
-            .then(res => {
-              this.imgUrl = res.image;
+            .then( res => {
+              this.imgUrl = res.data.image;
             })
             .catch(err => {
               console.log(err);

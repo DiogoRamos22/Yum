@@ -1,6 +1,5 @@
-import { Injectable, ɵConsole } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, pipe } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { ApiService } from '../_services/api.service';
 
@@ -11,7 +10,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient, private userApi: ApiService) {
+    constructor( private userApi: ApiService ) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -19,22 +18,25 @@ export class AuthenticationService {
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
+    public currentUserUpdate(user) {
+      this.currentUserSubject.next(user);
+    }
     login(email: string, password: string) {
       // tslint:disable-next-line: prefer-const
       let promise = new Promise(( resolve, reject ) => {
         this.userApi.loginUser(email, password)
           .then( res => {
-            localStorage.setItem('currentUser', JSON.stringify(res));
+            localStorage.setItem('currentUser', JSON.stringify(res.data));
             this.userApi.meUser()
               .then( user => {
-                user.token = res.token;
-                if (user && user.token) {
+                user.data.token = res.data.token;
+                if (user.data && user.data.token) {
                   localStorage.removeItem('currentUser');
-                  localStorage.setItem('currentUser', JSON.stringify(user));
-                  this.currentUserSubject.next(user);
-                  this.results = user;
+                  localStorage.setItem('currentUser', JSON.stringify(user.data));
+                  this.currentUserSubject.next(user.data);
+                  this.results = user.data;
                   resolve(this.results);
-                  return user;
+                  return user.data;
                 } else {
                   reject('Error.');
                 }
