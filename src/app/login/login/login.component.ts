@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   faLock = faLock;
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private authenticationService: AuthenticationService,
-      private snackBar: SnackBarComponent
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private snackBar: SnackBarComponent
   ) {
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) {

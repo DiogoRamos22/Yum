@@ -131,6 +131,17 @@ export class ApiService {
     return axios.post('/api/changeType', formData, this.config);
   }
 
+  addMoney(value) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('money', value);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/addMoney', formData, this.config);
+  }
+
 
   getToken(): string {
     const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));

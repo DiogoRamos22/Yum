@@ -15,6 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule} from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule} from '@angular/material/dialog';
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
@@ -34,10 +36,8 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminFoodComponent } from './admin/admin-food/admin-food.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { MyFoodComponent } from './my-food/my-food.component';
-import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatChipsModule } from "@angular/material/chips";
+import { WalletComponent } from './profile/wallet/wallet.component';
+import { DialogComponent } from './profile/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,9 @@ import { MatChipsModule } from "@angular/material/chips";
     FoodComponent,
     AdminUsersComponent,
     AdminFoodComponent,
-    MyFoodComponent
+    MyFoodComponent,
+    WalletComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,8 +76,9 @@ import { MatChipsModule } from "@angular/material/chips";
     MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatTabsModule
-
+    MatTabsModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
