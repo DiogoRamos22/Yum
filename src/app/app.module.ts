@@ -38,6 +38,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { DialogComponent } from './profile/dialog/dialog.component';
+import { AdminHistoryComponent } from './admin/admin-history/admin-history.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { DialogComponent } from './profile/dialog/dialog.component';
     AdminFoodComponent,
     MyFoodComponent,
     WalletComponent,
-    DialogComponent
+    DialogComponent,
+    AdminHistoryComponent
   ],
   imports: [
     BrowserModule,

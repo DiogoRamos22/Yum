@@ -1,4 +1,6 @@
 <app-nav-bar></app-nav-bar>
+<mat-label>Filter</mat-label>
+<input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
 <mat-grid-list [cols]="breakpoint" rowHeight="550px" gutterSize="25px" (window:resize)="onResize($event)">
   <mat-grid-tile *ngFor="let dish of dishes">
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
