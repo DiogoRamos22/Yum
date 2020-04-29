@@ -22,6 +22,8 @@ export interface FoodData {
   type: string;
   updated_at: any;
   userId: string;
+  firstName: string;
+  lastName: string;
 }
 @Component({
   selector: 'app-foodtable',
@@ -46,6 +48,7 @@ export class FoodtableComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private api: ApiService, public dialog: MatDialog) {
     this.api.getAllDishes()
       .then( res => {
+        console.log(res.data)
         const food: FoodData[] = [];
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < res.data.length; i++) {
@@ -102,6 +105,8 @@ export class FoodtableComponent implements OnInit {
       type: data.type,
       updated_at: data.updated_at,
       userId: data.userId,
+      firstName: data.firstName,
+      lastName: data.lastName
     };
   }
 
