@@ -34,6 +34,7 @@ export class FoodComponent implements OnInit {
   get f() { return this.quantityForm.controls; }
 
   onSubmit() {
+    this.snackBar.openSnackBar('Buying dish...', 'Dismiss', 2000);
     this.buyDish(this.f.id.value, this.f.quantity.value, this.f.datetime.value);
   }
 
@@ -44,6 +45,7 @@ export class FoodComponent implements OnInit {
         console.log(res);
       })
       .catch( err => {
+        this.snackBar.openSnackBar('Error while buying dish', 'Dismiss', 2000);
         console.log(err);
       });
   }

@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatDialog } from '@angular/material/dialog';
 import { FoodComponent } from '../food/food.component';
+import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
+
 
 export interface FoodData {
   created_at: string;
@@ -28,7 +30,8 @@ export interface FoodData {
 @Component({
   selector: 'app-foodtable',
   templateUrl: './foodtable.component.html',
-  styleUrls: ['./foodtable.component.scss']
+  styleUrls: ['./foodtable.component.scss'],
+  providers: [SnackBarComponent]
 })
 export class FoodtableComponent implements OnInit {
   search: string;
@@ -45,7 +48,13 @@ export class FoodtableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private api: ApiService, public dialog: MatDialog) {
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private api: ApiService, 
+    public dialog: MatDialog,
+    private snackBar: SnackBarComponent) {
+    this.snackBar.openSnackBar('Loading dishes...', 'Dismiss', 2000);
     this.api.getAllDishes()
       .then( res => {
         console.log(res.data)
@@ -82,6 +91,7 @@ export class FoodtableComponent implements OnInit {
         });
       })
       .catch( err => {
+        this.snackBar.openSnackBar('Error while loading dishes', 'Dismiss', 2000);
         console.log(err);
       });
 

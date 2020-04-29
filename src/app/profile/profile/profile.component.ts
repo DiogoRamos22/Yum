@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../_services/api.service';
+import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [SnackBarComponent]
 })
 export class ProfileComponent implements OnInit {
   currentUserLocal;
@@ -22,7 +24,8 @@ export class ProfileComponent implements OnInit {
   email: string;
   card: string;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private snackBar: SnackBarComponent) {
+    this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
     api.getAvatar()
       .then(res => {
         this.imgUrl = res.data.image;
@@ -41,6 +44,7 @@ export class ProfileComponent implements OnInit {
 
       })
       .catch(err => {
+        this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
         console.log(err);
       });
   }
@@ -50,6 +54,7 @@ export class ProfileComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
+    this.snackBar.openSnackBar('Image selected successfully', 'Dismiss', 2000);
   }
 
   update() {
@@ -59,9 +64,11 @@ export class ProfileComponent implements OnInit {
           console.log(res);
           this.api.getAvatar()
             .then( res => {
+              this.snackBar.openSnackBar('Image updated successfully', 'Dismiss', 2000);
               this.imgUrl = res.data.image;
             })
             .catch(err => {
+              this.snackBar.openSnackBar('Error', 'Dismiss', 2000);
               console.log(err);
             });
         })

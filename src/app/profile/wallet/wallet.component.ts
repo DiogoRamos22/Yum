@@ -5,7 +5,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.css']
+  styleUrls: ['./wallet.component.css'],
 })
 export class WalletComponent implements OnInit {
   money: number;
