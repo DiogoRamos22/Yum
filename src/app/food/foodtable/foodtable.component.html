@@ -1,12 +1,16 @@
 <app-nav-bar></app-nav-bar>
-<input matInput (keyup)="applySearch($event)" [(ngModel)]="searchDish" placeholder="Search food">
 
-<label id="example-radio-group-label">Type of Dish</label>
+<div id="searchPreferences">
+
+<input matInput (keyup)="applySearch($event)" [(ngModel)]="searchDish" placeholder="Search food" id="applySearch">
+<label id="example-radio-group-label">Type of Dish:</label>
 <mat-radio-group MatRadioChange aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="typeOfDishChosen" (change)='applyFilter($event)'>
   <mat-radio-button class="example-radio-button" *ngFor="let typeDish of typeDishes" [value]="typeDish">
     {{typeDish}}
   </mat-radio-button>
 </mat-radio-group>
+
+</div>
 
 
 <mat-grid-list [cols]="breakpoint" rowHeight="550px" gutterSize="25px" (window:resize)="onResize($event)">
@@ -18,9 +22,6 @@
           <mat-card-title align="center">{{dish.name}}</mat-card-title>
           <p class="montserrat">
             Ingredients: {{dish.ingredients}}
-          </p>
-          <p align="left" class="montserrat">
-            Vendor: <a [routerLink]="['/user', dish.userId]">click</a>
           </p>
           <p align="end" class="montserrat">
             Rating: {{dish.points}}

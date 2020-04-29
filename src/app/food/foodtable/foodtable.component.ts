@@ -110,14 +110,14 @@ export class FoodtableComponent implements OnInit {
         if (window.innerWidth <= 750) {
           if (window.innerWidth <= 500) {
             this.breakpoint = 1;
-            this.height = 500;
+            this.height = 350;
           } else {
             this.breakpoint = 2;
-            this.height = 425;
+            this.height = 450;
           }
         } else {
           this.breakpoint = 3;
-          this.height = 450;
+          this.height = 500;
         }
       } else {
         this.breakpoint = 4;
@@ -131,14 +131,14 @@ export class FoodtableComponent implements OnInit {
       if (event.target.innerWidth <= 750) {
         if (event.target.innerWidth <= 500) {
           this.breakpoint = 1;
-          this.height = 500;
+          this.height = 350;
         } else {
           this.breakpoint = 2;
           this.height = 450;
         }
       } else {
         this.breakpoint = 3;
-        this.height = 450;
+        this.height = 500;
       }
     } else {
       this.breakpoint = 4;
