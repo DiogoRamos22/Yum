@@ -1,8 +1,8 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { routingComponents, AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule} from '@angular/material/dialog';
+import { MatRadioModule} from '@angular/material/radio';
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
@@ -67,6 +68,7 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
@@ -80,7 +82,8 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
     MatSnackBarModule,
     MatTabsModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

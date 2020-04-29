@@ -1,6 +1,14 @@
 <app-nav-bar></app-nav-bar>
-<mat-label>Filter</mat-label>
-<input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+<input matInput (keyup)="applySearch($event)" [(ngModel)]="searchDish" placeholder="Search food">
+
+<label id="example-radio-group-label">Type of Dish</label>
+<mat-radio-group MatRadioChange aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="typeOfDishChosen" (change)='applyFilter($event)'>
+  <mat-radio-button class="example-radio-button" *ngFor="let typeDish of typeDishes" [value]="typeDish">
+    {{typeDish}}
+  </mat-radio-button>
+</mat-radio-group>
+
+
 <mat-grid-list [cols]="breakpoint" rowHeight="550px" gutterSize="25px" (window:resize)="onResize($event)">
   <mat-grid-tile *ngFor="let dish of dishes">
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
