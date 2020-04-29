@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { HomeComponent } from './home/home/home.component';
 import { FoodtableComponent } from './food/foodtable/foodtable.component';
 import { MyFoodComponent } from './my-food/my-food.component';
+import { UserComponent } from './user/user/user.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
   {path: 'profile', component: ProfileComponent},
   {path: 'food', component: FoodtableComponent},
-  {path: 'myfood', component: MyFoodComponent}
+  {path: 'myfood', component: MyFoodComponent},
+  {path: 'user/:userId', component: UserComponent}
 ];
 
 @NgModule({
@@ -26,4 +28,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 // tslint:disable-next-line: max-line-length
-export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, MyFoodComponent];
+export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, MyFoodComponent, UserComponent];
