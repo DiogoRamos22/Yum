@@ -14,10 +14,11 @@
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>
         <li class="list-group-item">District: {{district}}</li>
+        <li class="list-group-item"><button mat-button>Rate this vendor</button></li>
       </ul>
     </div>
   </mat-tab>
   <mat-tab label="Dishes">
-    Construction
+    <app-food-table></app-food-table>
   </mat-tab>
 </mat-tab-group>

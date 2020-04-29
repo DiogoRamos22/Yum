@@ -29,9 +29,11 @@ export class UserComponent implements OnInit {
       this.userId = params.userId;
       this.api.userInfo(this.userId)
         .then( res => {
-          this.imgUrl = res.data.image;
+
+          this.imgUrl = 'http://yum-app.online/uploads/' + res.data.avatar;
           this.firstName = res.data.firstName;
           this.lastName = res.data.lastName;
+          this.nickname = res.data.nickname;
           this.birth = res.data.birth;
           this.gender = res.data.gender;
           this.district = res.data.district;
