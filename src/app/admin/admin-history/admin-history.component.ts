@@ -31,7 +31,6 @@ export class AdminHistoryComponent implements OnInit {
     this.loading = true;
     this.api.GetAllHistory()
       .then(history => {
-        console.log(history);
         this.loading = false;
         this.history = history.data;
         this.dataSource = new MatTableDataSource(history.data);

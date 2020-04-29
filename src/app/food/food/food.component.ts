@@ -22,7 +22,8 @@ export class FoodComponent implements OnInit {
   ngOnInit() {
     this.quantityForm = this.formBuilder.group({
       quantity: [''],
-      id: this.dialogRef._containerInstance._config.data.id
+      id: this.dialogRef._containerInstance._config.data.id,
+      datetime: ['']
     });
   }
 
@@ -33,11 +34,12 @@ export class FoodComponent implements OnInit {
   get f() { return this.quantityForm.controls; }
 
   onSubmit() {
-    this.buyDish(this.f.id.value, this.f.quantity.value);
+    this.buyDish(this.f.id.value, this.f.quantity.value, this.f.datetime.value);
   }
 
-  buyDish(id, amount) {
-    this.api.buyDish(id, amount)
+  buyDish(id, amount, deliveryDate) {
+    console.log(deliveryDate)
+    this.api.buyDish(id, amount, deliveryDate)
       .then( res => {
         console.log(res);
       })

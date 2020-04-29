@@ -159,11 +159,12 @@ export class ApiService {
     return axios.post('/api/addMoney', formData, this.config);
   }
 
-  buyDish(id, numberOfDishes) {
+  buyDish(id, numberOfDishes, deliveryDate) {
     const token = this.getToken();
     const formData = new FormData();
     formData.append('dishId', id);
     formData.append('number', numberOfDishes);
+    formData.append('dataEntrega', deliveryDate);
 
     this.config.headers = {
       'Content-Type': 'application/json',
