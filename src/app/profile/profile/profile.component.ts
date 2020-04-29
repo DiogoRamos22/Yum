@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   county: string;
   nickname: string;
   email: string;
+  card: string;
 
   constructor(private api: ApiService) {
     api.getAvatar()
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
         this.county = this.currentUserLocal.county;
         this.nickname = this.currentUserLocal.nickname;
         this.email = this.currentUserLocal.email;
+        this.card = this.currentUserLocal.card;
 
 
       })

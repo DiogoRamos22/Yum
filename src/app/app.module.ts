@@ -40,6 +40,10 @@ import { MyFoodComponent } from './my-food/my-food.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { DialogComponent } from './profile/dialog/dialog.component';
 import { AdminHistoryComponent } from './admin/admin-history/admin-history.component';
+import { ProfileFoodComponent } from './profile/profile-food/profile-food.component';
+import { EditDialogComponent } from './profile/edit-dialog/edit-dialog.component';
+import { HistoryComponent } from './profile/history/history.component';
+import { RateDialogComponent } from './profile/rate-dialog/rate-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,11 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
     MyFoodComponent,
     WalletComponent,
     DialogComponent,
-    AdminHistoryComponent
+    AdminHistoryComponent,
+    ProfileFoodComponent,
+    EditDialogComponent,
+    HistoryComponent,
+    RateDialogComponent
   ],
   imports: [
     BrowserModule,

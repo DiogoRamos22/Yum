@@ -1,23 +1,35 @@
 <app-nav-bar></app-nav-bar>
-<app-wallet></app-wallet>
-  <div class="card m-auto" style="width: 20rem;">
-    <div>
-      <img class="card-img-top" [src]=imgUrl alt="Card image cap">
-      <span>
-        <input type="file" (change)="onFileSelected($event)" style="width: 76%;">
-        <button (click)="update()" [disabled]="!selectedFile">Update</button>
-      </span>
+<mat-tab-group>
+  <mat-tab label="Profile">
+    <app-wallet></app-wallet>
+    <div class="card m-auto" style="width: 20rem;">
+      <div>
+        <img class="card-img-top" [src]=imgUrl alt="Card image cap">
+        <span>
+          <input type="file" (change)="onFileSelected($event)" style="width: 76%;">
+          <button (click)="update()" [disabled]="!selectedFile">Update</button>
+        </span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{firstName}} {{lastName}}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Nickname: {{nickname}}</li>
+        <li class="list-group-item">Money: {{card}}€</li>
+        <li class="list-group-item">E-mail: {{email}}</li>
+        <li class="list-group-item">Date of birth: {{birth}}</li>
+        <li class="list-group-item">Gender: {{gender}}</li>
+        <li class="list-group-item">Address: {{address}}</li>
+        <li class="list-group-item">District: {{district}}</li>
+        <li class="list-group-item">County: {{county}}</li>
+      </ul>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{firstName}} {{lastName}}</h5>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Nickname: {{nickname}}</li>
-      <li class="list-group-item">E-mail: {{email}}</li>
-      <li class="list-group-item">Date of birth: {{birth}}</li>
-      <li class="list-group-item">Gender: {{gender}}</li>
-      <li class="list-group-item">Address: {{address}}</li>
-      <li class="list-group-item">District: {{district}}</li>
-      <li class="list-group-item">County: {{county}}</li>
-    </ul>
-  </div>
+  </mat-tab>
+  <mat-tab label="My Dishes">
+    <app-profile-food></app-profile-food>
+  </mat-tab>
+  <mat-tab label="History">
+    <app-history></app-history>
+  </mat-tab>
+</mat-tab-group>
+

@@ -1,0 +1,13 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.my-button {
+  background-color: #BB3127;
+  border-radius: 24px;
+  color: #ffffff;
+}
