@@ -177,10 +177,13 @@ export class ApiService {
   }
 
   editDish(newDate, id, amount) {
+    console.log(amount);
+    console.log(id);
+    console.log(newDate)
     const token = this.getToken();
     const formData = new FormData();
-    formData.append('newData', newDate);
     formData.append('id', id);
+    formData.append('newData', newDate);
     formData.append('newNumber', amount);
 
     this.config.headers = {

@@ -24,7 +24,8 @@ export class EditDialogComponent implements OnInit {
   ngOnInit() {
     this.numberForm = this.formBuilder.group({
       quantity: [''],
-      dishId: this.dialogRef._containerInstance._config.data.dishId
+      dishId: this.dialogRef._containerInstance._config.data.dishId,
+      date: ['']
     });
   }
 
@@ -34,11 +35,12 @@ export class EditDialogComponent implements OnInit {
 
   get f() { return this.numberForm.controls; }
 
-  onSubmit() { this.addMoney(this.f.dishId.value, this.f.quantity.value); }
+  onSubmit() { this.editDish(this.f.dishId.value, this.f.quantity.value, this.f.date.value); }
 
-  addMoney(id, amount) {
-    console.log(amount);
-    console.log(id);
-    // missing api
+  editDish(id, amount, date) {
+    this.api.editDish(date, id, amount.toString())
+    .then(res => {
+      console.log(res)
+    });
   }
 }

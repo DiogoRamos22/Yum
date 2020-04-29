@@ -17,7 +17,7 @@ export class ProfileFoodComponent implements OnInit {
   constructor(private api: ApiService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.api.getUserDishes()
+    this.api.getUserDishes(JSON.parse(localStorage.getItem('currentUser')).id)
       .then( res => {
         this.dishes = res.data;
       })
