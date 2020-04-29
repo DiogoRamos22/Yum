@@ -120,13 +120,13 @@ export class ApiService {
     return axios.get('/api/getUserDishes', this.config);
   }
 
-  getAllHistory() {
+  GetAllHistory() {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.get('/api/getAllHistory', this.config);
+    return axios.get('/api/GetAllHistory', this.config);
   }
 
   changeType(type) {
