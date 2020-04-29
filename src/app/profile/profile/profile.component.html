@@ -1,13 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <mat-tab-group>
   <mat-tab label="Profile">
-    <app-wallet></app-wallet>
     <div class="card m-auto" style="width: 20rem;">
       <div>
-        <img class="card-img-top" [src]=imgUrl alt="Card image cap">
+        <img class="card-img-top profile-img-height" [src]=imgUrl alt="Card image cap">
         <span>
-          <input type="file" (change)="onFileSelected($event)" style="width: 76%;">
-          <button (click)="update()" [disabled]="!selectedFile">Update</button>
+          <input class="m-1 mt-btn mt-2" type="file" (change)="onFileSelected($event)" style="width: 76%;">
+          <button class="m-1 mt-2 ml-4 p-1 pr-3 pl-3 button-box btn my-btn text-white" (click)="update()" [disabled]="!selectedFile">Update</button>
         </span>
       </div>
       <div class="card-body">
@@ -15,7 +14,7 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Nickname: {{nickname}}</li>
-        <li class="list-group-item">Money: {{card}}€</li>
+        <li class="list-group-item">Money: {{card}}€   <app-wallet></app-wallet></li>
         <li class="list-group-item">E-mail: {{email}}</li>
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>

@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-food',
   templateUrl: './user-food.component.html',
-  styleUrls: ['./user-food.component.css']
+  styleUrls: ['./user-food.component.scss']
 })
 export class UserFoodComponent implements OnInit {
   breakpoint: number;
@@ -16,21 +16,20 @@ export class UserFoodComponent implements OnInit {
   dishes: any;
   quantity: any;
 
-  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog) { }
-
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog) {
     this.route.params.subscribe( params => {
       this.userId = params.userId;
       this.api.getUserDishes(this.userId)
         .then( res => {
           this.dishes = res.data;
-          console.log('Sucesss');
         })
         .catch( err => {
           console.log(err);
-
         });
     });
+   }
+
+  ngOnInit(): void {
     if (window.innerWidth <= 1300) {
       if (window.innerWidth <= 750) {
         if (window.innerWidth <= 500) {

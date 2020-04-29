@@ -12,10 +12,7 @@
                     <fa-icon [icon]="faEnvelope"></fa-icon>
                   </div>
                 </div>
-                <input class="user-box mt-3 mb-3 my-btn form-control" type="email" placeholder="E-mail" name="Email" id="email" formControlName="email">
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                  <div *ngIf="f.email.errors.required">email is required</div>
-                </div>
+                <input class="user-box mt-3 mb-3 my-btn form-control" type="text" placeholder="E-mail/Username" name="Email" id="email" formControlName="email">
               </div>
               <div class="input-group">
                 <div class="input-group-prepend">
