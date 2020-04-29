@@ -111,13 +111,16 @@ export class ApiService {
     return axios.get('/api/getAllDishes', this.config);
   }
 
-  getUserDishes() {
+  getUserDishes(id) {
     const token = this.getToken();
+    const formData = new FormData();
+    formData.append('userId', id);
+
     this.config.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token
     };
-    return axios.get('/api/getUserDishes', this.config);
+    return axios.post('/api/getUserDishes', formData, this.config);
   }
 
   GetAllHistory() {
@@ -171,6 +174,45 @@ export class ApiService {
       Authorization: 'Bearer ' + token
     };
     return axios.post('/api/buyDish', formData, this.config);
+  }
+
+  editDish(newDate, id, amount) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('newData', newDate);
+    formData.append('id', id);
+    formData.append('newNumber', amount);
+
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/editDish', formData, this.config);
+  }
+
+  rateVendor(idVendor, points) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('idVendor', idVendor);
+    formData.append('points', points);
+
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/rateVendor', formData, this.config);
+  }
+
+  userInfo(userId) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('userId', userId);
+
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/userInfo', formData, this.config);
   }
 
 
