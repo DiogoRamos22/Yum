@@ -20,7 +20,7 @@
             Ingredients: {{dish.ingredients}}
           </p>
           <p align="left" class="montserrat">
-            Vendor:
+            Vendor: <a [routerLink]="['/user', dish.userId]">click</a>
           </p>
           <p align="end" class="montserrat">
             Rating: {{dish.points}}
