@@ -1,1 +1,10 @@
-<p>food works!</p>
+<div style="height: 150px;" mat-dialog-content>
+  <p>How much do you wish to add?</p>
+  <form [formGroup]="quantityForm" (ngSubmit)="onSubmit()">
+    <input class="user-box mt-3 mb-3 my-btn form-control" type="number" placeholder="quantity" name="Quantity" id="quantity" formControlName="quantity">
+    <div mat-dialog-actions>
+      <button mat-button (click)="onCloseClick()">No Thanks</button>
+      <button mat-button type="submit">Add</button>
+    </div>
+  </form>
+</div>

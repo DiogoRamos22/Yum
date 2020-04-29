@@ -8,7 +8,6 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { HomeComponent } from './home/home/home.component';
 import { FoodtableComponent } from './food/foodtable/foodtable.component';
-import { FoodComponent } from './food/food/food.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
   {path: 'profile', component: ProfileComponent},
   {path: 'food', component: FoodtableComponent},
-  {path: 'food/buy', component: FoodComponent},
   {path: 'myfood', component: MyFoodComponent}
 ];
 
@@ -28,4 +26,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 // tslint:disable-next-line: max-line-length
-export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, FoodComponent, MyFoodComponent];
+export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, MyFoodComponent];

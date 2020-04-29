@@ -156,6 +156,7 @@ export class ApiService {
     const formData = new FormData();
     formData.append('dishId', id);
     formData.append('number', numberOfDishes);
+
     this.config.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token

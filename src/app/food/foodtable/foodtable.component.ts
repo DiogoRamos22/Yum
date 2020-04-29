@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatRadioChange } from '@angular/material/radio';
+import { MatDialog } from '@angular/material/dialog';
+import { FoodComponent } from '../food/food.component';
 
 export interface FoodData {
   created_at: string;
@@ -35,11 +37,13 @@ export class FoodtableComponent implements OnInit {
   typeOfDishChosen: string;
   typeDishes: string[] = ['All', 'Pizza', 'Sushi', 'Fast food', 'Desserts', 'Healthy', 'Traditional'];
   searchDish: any;
+  quantity: string;
+  foodId: string;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private api: ApiService) {
+  constructor(private route: ActivatedRoute, private router: Router, private api: ApiService, public dialog: MatDialog) {
     this.api.getAllDishes()
       .then( res => {
         const food: FoodData[] = [];
@@ -60,7 +64,6 @@ export class FoodtableComponent implements OnInit {
             });
             matchFilter.push(customFilter.some(Boolean));
           });
-          console.log(matchFilter);
           return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
         };
         this.dataArray.paginator = this.paginator;
@@ -80,9 +83,7 @@ export class FoodtableComponent implements OnInit {
       });
 
   }
-  MatRadioChange(){
 
-  }
   convertData(data): FoodData {
     if (data.updated_at === null) {
       data.updated_at = '';
@@ -146,7 +147,17 @@ export class FoodtableComponent implements OnInit {
     }
   }
   buyFood(id) {
-    this.router.navigate(['/food/buy'], { queryParams: { foodId: id } });
+    const dialogRef = this.dialog.open(FoodComponent, {
+      width: '350px',
+      data: {
+        quantity: this.quantity,
+        id
+      }
+    });
+    dialogRef.afterClosed().subscribe( res => {
+      console.log('Dialog Closed');
+      this.quantity = res;
+    });
   }
   applyFilter(radioChange: MatRadioChange) {
     if (this.typeOfDishChosen !== 'All' && this.searchDish !== undefined && this.searchDish !== '') {
