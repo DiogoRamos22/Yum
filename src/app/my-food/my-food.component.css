@@ -2,8 +2,26 @@
     display: table;
     width: 100%;
  }
- #newdish_form {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+
+
+
+ .container {
+   margin: 0 auto; 
+   width:325px;
+   clear: both;
  }
+ 
+ .container input {
+   width: 300px;
+   clear: both;
+   
+ }
+
+ #butao, #formName{
+    text-align: center;
+ }
+
+ #foto{
+    margin-bottom: 8px;
+ }
+ 

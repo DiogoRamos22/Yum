@@ -1,14 +1,15 @@
 <app-nav-bar></app-nav-bar>
 <div id="parent">
-    <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form>
-        <h3 class="mt-5"><hr/>Add your dish<hr/></h3>
+    <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form class="container">
+        <h3 class="mt-5" id="formName"><hr/>Add your dish<hr/></h3>
+  
         <div>
             <label>
             Dish Name:
             <input type="text" formControlName="name">     
             </label>
         </div>
-        <div>
+        <div id="foto">
             <input type="file" (change)="onFileSelected($event)">
         </div>
         <div>
@@ -63,7 +64,7 @@
             <input type="number" formControlName="price">
             </label>
         </div>
-        <div>
+        <div id="butao">
             <button type="submit" [disabled]="!newdishForm.valid">Add dish</button>
          </div>
     </form>  
