@@ -102,7 +102,7 @@ export class FoodtableComponent implements OnInit {
       type: data.type,
       updated_at: data.updated_at,
       userId: data.userId,
-    }
+    };
   }
 
   ngOnInit(): void {

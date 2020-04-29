@@ -128,6 +128,14 @@ export class ApiService {
     };
     return axios.get('/api/GetAllHistory', this.config);
   }
+  GetHistoryCurrentUser() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.get('/api/getHistoryCurrentUser', this.config);
+  }
 
   changeType(type) {
     const token = this.getToken();

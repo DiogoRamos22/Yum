@@ -13,16 +13,16 @@ export class AdminHistoryComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   loading = false;
-  dataSource;
+  dataSource: MatTableDataSource<unknown>;
   history: {
-    id:string;
-    idDish:string;
-    idSeller:string;
-    idCostumer:string;
-    number:string;
-    amountPaid:string;
-    created_at:string;
-  }
+    id: string;
+    idDish: string;
+    idSeller: string;
+    idCostumer: string;
+    number: string;
+    amountPaid: string;
+    created_at: string;
+  };
   displayedColumns: string[] = ['id', 'idDish', 'idSeller', 'idCostumer', 'number', 'amountPaid', 'created_at'];
 
   constructor(private api: ApiService) { }
