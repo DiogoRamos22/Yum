@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   nickname: string;
   email: string;
   card: string;
+  isNotClient = false;
 
   constructor(private api: ApiService, private snackBar: SnackBarComponent) {
     this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
@@ -40,7 +41,11 @@ export class ProfileComponent implements OnInit {
         this.nickname = this.currentUserLocal.nickname;
         this.email = this.currentUserLocal.email;
         this.card = this.currentUserLocal.card;
+        console.log(this.currentUserLocal.type);
 
+        if (this.currentUserLocal.type !== 'Client') {
+          this.isNotClient = true;
+        }
 
       })
       .catch(err => {

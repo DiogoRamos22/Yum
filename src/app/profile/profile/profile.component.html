@@ -25,9 +25,12 @@
       </ul>
     </div>
   </mat-tab>
-  <mat-tab label="My Dishes">
-    <app-profile-food></app-profile-food>
-  </mat-tab>
+  <div *ngIf="isNotClient; then dishes" ></div>
+  <ng-template  #dishes>
+    <mat-tab label="My Dishes">
+      <app-profile-food></app-profile-food>
+    </mat-tab>
+  </ng-template>
   <mat-tab label="History">
     <app-history></app-history>
   </mat-tab>
