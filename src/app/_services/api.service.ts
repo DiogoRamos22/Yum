@@ -8,7 +8,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 export class ApiService {
 
   config: AxiosRequestConfig = {
-    baseURL: 'http://yum-app.online',
+    baseURL: 'https://yum-app.online',
     timeout: 10000,
     responseType: 'json',
     validateStatus: (status: number) => status >= 200 && status < 300,
