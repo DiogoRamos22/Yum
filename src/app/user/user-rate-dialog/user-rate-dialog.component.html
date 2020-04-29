@@ -1,7 +1,7 @@
 <div style="height: 150px;" mat-dialog-content>
-  <p>Rate this Dish!</p>
-  <form [formGroup]="rateForm" (ngSubmit)="onSubmit()">
-    <input class="user-box mt-3 mb-3 my-btn form-control" type="number" placeholder="points" name="Points" id="points" formControlName="points">
+  <p>Rate this Vendor</p>
+  <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+    <input class="user-box mt-3 mb-3 my-btn form-control" type="number" placeholder="rating" name="Rating" id="rating" formControlName="rating">
     <div mat-dialog-actions>
       <button mat-button type="button" (click)="onCloseClick()">Leave</button>
       <button mat-button type="submit">Rate</button>

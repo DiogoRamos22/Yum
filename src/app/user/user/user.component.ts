@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UserRateDialogComponent} from '../user-rate-dialog/user-rate-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -21,8 +23,9 @@ export class UserComponent implements OnInit {
   nickname: any;
   email: any;
   card: any;
+  rating: any;
 
-  constructor(private route: ActivatedRoute, private api: ApiService) { }
+  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe( params => {
@@ -38,11 +41,25 @@ export class UserComponent implements OnInit {
           this.gender = res.data.gender;
           this.district = res.data.district;
           this.email = res.data.email;
+          this.userId = res.data.id;
         })
         .catch( err => {
           console.log(err);
         })
   });
+  }
+  rateVendor(vendorId) {
+    const dialogRef = this.dialog.open(UserRateDialogComponent, {
+      width: '350px',
+      data: {
+        rating: this.rating,
+        vendorId
+      }
+    });
+    dialogRef.afterClosed().subscribe( res => {
+      console.log('Dialog Closed');
+      this.rating = res;
+    });
   }
 
 }

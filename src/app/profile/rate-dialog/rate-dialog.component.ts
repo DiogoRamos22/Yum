@@ -40,7 +40,13 @@ export class RateDialogComponent implements OnInit {
     //change html to RADIO INPUT
     console.log(points);
     console.log(id);
-    // missing api
+    this.api.rateDish(id, points)
+      .then( res => {
+        console.log(res);
+      })
+      .catch( err => {
+        console.log(err);
+      });
   }
 
 }

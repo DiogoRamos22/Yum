@@ -44,7 +44,9 @@ import { ProfileFoodComponent } from './profile/profile-food/profile-food.compon
 import { EditDialogComponent } from './profile/edit-dialog/edit-dialog.component';
 import { HistoryComponent } from './profile/history/history.component';
 import { RateDialogComponent } from './profile/rate-dialog/rate-dialog.component';
+import { UserRateDialogComponent } from './user/user-rate-dialog/user-rate-dialog.component';
 import { UserComponent } from './user/user/user.component';
+import { UserFoodComponent } from './user/user-food/user-food.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { UserComponent } from './user/user/user.component';
     EditDialogComponent,
     HistoryComponent,
     RateDialogComponent,
-    UserComponent
+    UserComponent,
+    UserRateDialogComponent,
+    UserFoodComponent
   ],
   imports: [
     BrowserModule,

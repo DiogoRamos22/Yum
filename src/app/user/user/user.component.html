@@ -14,11 +14,11 @@
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>
         <li class="list-group-item">District: {{district}}</li>
-        <li class="list-group-item"><button mat-button>Rate this vendor</button></li>
+        <li class="list-group-item"><button mat-button class="my-button" (click)=rateVendor(userId)>Rate this vendor</button></li>
       </ul>
     </div>
   </mat-tab>
   <mat-tab label="Dishes">
-    <app-food-table></app-food-table>
+    <app-user-food></app-user-food>
   </mat-tab>
 </mat-tab-group>

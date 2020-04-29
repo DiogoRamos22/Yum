@@ -177,9 +177,6 @@ export class ApiService {
   }
 
   editDish(newDate, id, amount) {
-    console.log(amount);
-    console.log(id);
-    console.log(newDate)
     const token = this.getToken();
     const formData = new FormData();
     formData.append('id', id);
@@ -196,8 +193,9 @@ export class ApiService {
   rateVendor(idVendor, points) {
     const token = this.getToken();
     const formData = new FormData();
-    formData.append('idVendor', idVendor);
-    formData.append('points', points);
+
+    formData.append('vendorId', idVendor.toString());
+    formData.append('points', points.toString());
 
     this.config.headers = {
       'Content-Type': 'application/json',
@@ -216,6 +214,18 @@ export class ApiService {
       Authorization: 'Bearer ' + token
     };
     return axios.post('/api/userInfo', formData, this.config);
+  }
+
+  rateDish(id, rating) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('points', rating);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    };
+    return axios.post('/api/rateDish', formData, this.config);
   }
 
 
