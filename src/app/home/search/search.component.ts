@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-search',
@@ -11,10 +12,14 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
   faSearch = faSearch;
   searchForm: FormGroup;
+  isLogged = false;
 
   get f() { return this.searchForm.controls; }
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private auth: AuthenticationService) {
+    if (this.auth.currentUserValue) {
+      this.isLogged = true;
+    }
    }
 
   ngOnInit(): void {
@@ -24,6 +29,10 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/food'], { queryParams: { search: this.f.search.value } });
+    if (this.isLogged){
+      this.router.navigate(['/food'], { queryParams: { search: this.f.search.value } });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

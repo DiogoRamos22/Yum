@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-foodtype',
@@ -9,8 +10,13 @@ import { Router } from '@angular/router';
 export class FoodtypeComponent implements OnInit {
   breakpoint: number;
   height: number;
+  isLogged = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthenticationService ) {
+    if (this.auth.currentUserValue) {
+      this.isLogged = true;
+  }
+  }
 
   ngOnInit(): void {
     if (window.innerWidth <= 1300) {
@@ -54,7 +60,11 @@ export class FoodtypeComponent implements OnInit {
     }
   }
   redirect(typeFood) {
-    this.router.navigate(['/food'], { queryParams: { search: typeFood } });
+    if (this.isLogged){
+      this.router.navigate(['/food'], { queryParams: { search: typeFood } });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }
