@@ -42,9 +42,11 @@ export class UserRateDialogComponent implements OnInit {
         .catch( err => {
           console.log(err);
           //error snackbar
+          this.snackBar.openSnackBar('Looks like something went wrong', 'Dismiss', 2000);
         });
     } else {
       //snackbar saying to input a value from 0-5
+      this.snackBar.openSnackBar('Please insert a value between 0 and 5', 'Dismiss', 2000);
     }
   }
 }
