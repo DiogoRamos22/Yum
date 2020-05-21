@@ -47,6 +47,7 @@ import { RateDialogComponent } from './profile/rate-dialog/rate-dialog.component
 import { UserRateDialogComponent } from './user/user-rate-dialog/user-rate-dialog.component';
 import { UserComponent } from './user/user/user.component';
 import { UserFoodComponent } from './user/user-food/user-food.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { UserFoodComponent } from './user/user-food/user-food.component';
     RateDialogComponent,
     UserComponent,
     UserRateDialogComponent,
-    UserFoodComponent
+    UserFoodComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

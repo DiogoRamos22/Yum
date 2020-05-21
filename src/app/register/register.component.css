@@ -6,34 +6,21 @@
   justify-content: center;
   position: relative;
   height: 100%;
-  width: 610px;
-  margin-top: auto;
-  margin-bottom: auto;
+  width: 90%;
   flex-direction: column;
 }
 .user-box{
-  /*border-width: 2px 2px 2px 0px !important;
-  border-style: solid !important;
-  border-color: #313131 !important;
-  box-shadow: inset !important;*/
   background-color: rgb(247, 244, 243);
 }
 .user-box:focus{
   background-color: rgb(247, 244, 243) !important;
 }
 .button-box{
-  /*
-  border-width: 2px 2px 2px 2px;
-  border-style: solid;
-  border-color: #313131;*/
   background-color: #BB3127;
   font-weight: bold;
 }
 .icon-box{
   border-width: 0px 0px 0px 0px ;
-  /*
-  border-style: solid ;
-  border-color: #313131 ;*/
   border-radius: 24px 0px 0px 24px;
   background-color: rgb(247, 244, 243);
 }
@@ -50,6 +37,12 @@ input, textarea {
 .my-btn{
   border-radius: 24px 24px 24px 24px;
   border: 0px;
+}
+.my-shadow {
+  box-shadow: 0 .5rem 0.8rem rgba(0,0,0,.15)!important;
+}
+.p-2-5 {
+  padding: 0.75rem!important;
 }
 html, body {
   height: 100vh;

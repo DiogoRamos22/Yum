@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home/home.component';
 import { FoodtableComponent } from './food/foodtable/foodtable.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 import { UserComponent } from './user/user/user.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,7 +20,9 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'food', component: FoodtableComponent},
   {path: 'myfood', component: MyFoodComponent},
-  {path: 'user/:userId', component: UserComponent}
+  {path: 'user/:userId', component: UserComponent},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
@@ -28,4 +31,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 // tslint:disable-next-line: max-line-length
-export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, MyFoodComponent, UserComponent];
+export const routingComponents = [HomeComponent, LoginComponent, RegisterComponent, AdminComponent, ProfileComponent, FoodtableComponent, MyFoodComponent, UserComponent, NotFoundComponent];

@@ -15,7 +15,7 @@ export class FoodtypeComponent implements OnInit {
   constructor(private router: Router, private auth: AuthenticationService ) {
     if (this.auth.currentUserValue) {
       this.isLogged = true;
-  }
+    }
   }
 
   ngOnInit(): void {

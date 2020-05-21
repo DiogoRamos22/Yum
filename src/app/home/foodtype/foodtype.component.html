@@ -1,8 +1,18 @@
-<mat-grid-list class="ml-4 mr-4" [cols]="breakpoint" rowHeight="550px" gutterSize="25px" (window:resize)="onResize($event)">
+<mat-grid-list
+  class="ml-4 mr-4"
+  [cols]="breakpoint"
+  rowHeight="550px"
+  gutterSize="25px"
+  (window:resize)="onResize($event)"
+>
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/pizza-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/pizza-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Pizza</mat-card-title>
           <p class="montserrat">
@@ -10,7 +20,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('pizza')">I want pizza!</button>
+          <button mat-button class="my-button" (click)="redirect('pizza')">
+            I want pizza!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
@@ -18,7 +30,11 @@
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/sushi-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/sushi-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Sushi</mat-card-title>
           <p class="montserrat">
@@ -26,7 +42,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('sushi')">I want sushi!</button>
+          <button mat-button class="my-button" (click)="redirect('sushi')">
+            I want sushi!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
@@ -34,7 +52,11 @@
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/fastfood-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/fastfood-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Fast food</mat-card-title>
           <p class="montserrat">
@@ -42,7 +64,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('fast food')">I want fast food!</button>
+          <button mat-button class="my-button" (click)="redirect('fast food')">
+            I want fast food!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
@@ -50,7 +74,11 @@
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/desserts-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/desserts-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Desserts</mat-card-title>
           <p class="montserrat">
@@ -58,7 +86,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('desserts')">I want desserts!</button>
+          <button mat-button class="my-button" (click)="redirect('desserts')">
+            I want desserts!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
@@ -66,7 +96,11 @@
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/healthy-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/healthy-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Healthy</mat-card-title>
           <p class="montserrat">
@@ -74,7 +108,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('healthy')">I want healthy!</button>
+          <button mat-button class="my-button" (click)="redirect('healthy')">
+            I want healthy!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
@@ -82,7 +118,11 @@
   <mat-grid-tile>
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img mat-card-image src="../../../assets/imgs/traditional-card.jpg" alt="Photo of a pizza">
+        <img
+          mat-card-image
+          src="../../../assets/imgs/traditional-card.jpg"
+          alt="Photo of a pizza"
+        />
         <mat-card-content>
           <mat-card-title align="center">Traditional</mat-card-title>
           <p class="montserrat">
@@ -90,91 +130,15 @@
           </p>
         </mat-card-content>
         <mat-card-actions align="center">
-          <button mat-button class="my-button" (click)="redirect('traditional')">I want traditional!</button>
+          <button
+            mat-button
+            class="my-button"
+            (click)="redirect('traditional')"
+          >
+            I want traditional!
+          </button>
         </mat-card-actions>
       </div>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<!--
-  <div class="container-fluid" id="foodTypes">
-    <h2 class="roboto pt-5 pb-4_5">Find the type of food that pleases you the most!</h2>
-        <div class="container-fluid d-flex flex-row justify-content-center">
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/pizza-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Pizza</h5>
-                        <p class="card-text montserrat">Not from Italy, but just as delicious!</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want pizza!</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/sushi-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Sushi</h5>
-                        <p class="card-text montserrat">Recipe from Japan, made close to you</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want sushi!</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/fastfood-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Fast food</h5>
-                        <p class="card-text montserrat">Don't we all love fast food?</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want fastfood!</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/desserts-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Desserts</h5>
-                        <p class="card-text montserrat">To end your meals with a bang</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want desserts!</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/healthy-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Healthy</h5>
-                        <p class="card-text montserrat">Staying in shape has never been easier</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want healthy!</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-2">
-                <div class="card card-height card-no-border shadow card-round">
-                <img src="../../../assets/imgs/traditional-card.jpg" class="card-img-top card-round-img" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center roboto">Traditional</h5>
-                        <p class="card-text montserrat">Just like grandma used to make</p>
-                        <a href="#" class="align-self-center shadow mt-auto mb-2 btn my-btn text-white my-bg pr-4 pl-4">I want traditional!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-  </div>
--->
