@@ -37,7 +37,7 @@ export class UserRateDialogComponent implements OnInit {
     if ( rating <= 5 && rating >= 0) {
       this.api.rateVendor(id, rating)
         .then( res => {
-          console.log(res);
+          this.dialogRef.close();
         })
         .catch( err => {
           console.log(err);

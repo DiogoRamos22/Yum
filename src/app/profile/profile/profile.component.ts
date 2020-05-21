@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../_services/api.service';
 import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,7 @@ export class ProfileComponent implements OnInit {
   card: string;
   isNotClient = false;
 
-  constructor(private api: ApiService, private snackBar: SnackBarComponent) {
+  constructor(private api: ApiService, private snackBar: SnackBarComponent, private router: Router) {
     this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
     api.getAvatar()
       .then(res => {
@@ -41,7 +42,6 @@ export class ProfileComponent implements OnInit {
         this.nickname = this.currentUserLocal.nickname;
         this.email = this.currentUserLocal.email;
         this.card = this.currentUserLocal.card;
-        console.log(this.currentUserLocal.type);
 
         if (this.currentUserLocal.type !== 'Client') {
           this.isNotClient = true;
@@ -50,7 +50,8 @@ export class ProfileComponent implements OnInit {
       })
       .catch(err => {
         this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
-        console.log(err);
+        this.api.logoutUser();
+        this.router.navigate(['/login']);
       });
   }
 

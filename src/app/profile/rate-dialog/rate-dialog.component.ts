@@ -37,7 +37,6 @@ export class RateDialogComponent implements OnInit {
   onSubmit() { this.rateDish(this.f.dishId.value, this.f.points.value); }
 
   rateDish(id, points) {
-    //change html to RADIO INPUT
     console.log(points);
     console.log(id);
     this.api.rateDish(id, points)
