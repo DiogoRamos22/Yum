@@ -38,6 +38,7 @@ export class UserRateDialogComponent implements OnInit {
       this.api.rateVendor(id, rating)
         .then( res => {
           this.dialogRef.close();
+          this.snackBar.openSnackBar('You have sucessufully rated the vendor!', 'Dismiss', 2000);
         })
         .catch( err => {
           console.log(err);
