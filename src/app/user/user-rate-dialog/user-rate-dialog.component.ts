@@ -34,12 +34,17 @@ export class UserRateDialogComponent implements OnInit {
     this.rateVendor(this.f.id.value, this.f.rating.value);
   }
   rateVendor(id, rating) {
-    this.api.rateVendor(id, rating)
-      .then( res => {
-        console.log(res);
-      })
-      .catch( err => {
-        console.log(err);
-      });
+    if ( rating <= 5 && rating >= 0) {
+      this.api.rateVendor(id, rating)
+        .then( res => {
+          console.log(res);
+        })
+        .catch( err => {
+          console.log(err);
+          //error snackbar
+        });
+    } else {
+      //snackbar saying to input a value from 0-5
+    }
   }
 }
