@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { MatDialog } from '@angular/material/dialog';
 import { FoodComponent } from '../food/food.component';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 
 export interface FoodData {
@@ -49,51 +50,57 @@ export class FoodtableComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute, 
-    private router: Router, 
-    private api: ApiService, 
+    private route: ActivatedRoute,
+    private api: ApiService,
     public dialog: MatDialog,
-    private snackBar: SnackBarComponent) {
-    this.snackBar.openSnackBar('Loading dishes...', 'Dismiss', 2000);
-    this.api.getAllDishes()
-      .then( res => {
-        console.log(res.data)
-        const food: FoodData[] = [];
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < res.data.length; i++) {
-          food.push(this.convertData(res.data[i]));
-        }
+    private snackBar: SnackBarComponent,
+    private auth: AuthenticationService,
+    private router: Router) {
+      if (!this.auth.currentUserValue) {
+        this.router.navigate(['/']);
+      } else {
+        this.snackBar.openSnackBar('Loading dishes...', 'Dismiss', 2000);
+        this.api.getAllDishes()
+          .then( res => {
+            console.log(res.data)
+            const food: FoodData[] = [];
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < res.data.length; i++) {
+              food.push(this.convertData(res.data[i]));
+            }
 
-        this.dataArray = new MatTableDataSource(food);
-        this.dataArray.filterPredicate = (data: FoodData, filters: string) => {
-          const matchFilter = [];
-          const filterArray = filters.split('+');
-          const columns = (Object as any).values(data);
-          filterArray.forEach(filter => {
-            const customFilter = [];
-            columns.forEach(column => {
-              customFilter.push(column.toLowerCase().includes(filter));
+            this.dataArray = new MatTableDataSource(food);
+            this.dataArray.filterPredicate = (data: FoodData, filters: string) => {
+              const matchFilter = [];
+              const filterArray = filters.split('+');
+              const columns = (Object as any).values(data);
+              filterArray.forEach(filter => {
+                const customFilter = [];
+                columns.forEach(column => {
+                  customFilter.push(column.toLowerCase().includes(filter));
+                });
+                matchFilter.push(customFilter.some(Boolean));
+              });
+              return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
+            };
+            this.dataArray.paginator = this.paginator;
+            this.dataArray.sort = this.sort;
+
+
+            this.route.queryParams
+            .subscribe(params => {
+              this.dataArray.filter = params.search.trim().toLowerCase();
+
+              this.dishes = this.dataArray.filteredData;
+
             });
-            matchFilter.push(customFilter.some(Boolean));
+          })
+          .catch( err => {
+            this.snackBar.openSnackBar('Error while loading dishes', 'Dismiss', 2000);
+            console.log(err);
           });
-          return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
-        };
-        this.dataArray.paginator = this.paginator;
-        this.dataArray.sort = this.sort;
 
-
-        this.route.queryParams
-        .subscribe(params => {
-          this.dataArray.filter = params.search.trim().toLowerCase();
-
-          this.dishes = this.dataArray.filteredData;
-
-        });
-      })
-      .catch( err => {
-        this.snackBar.openSnackBar('Error while loading dishes', 'Dismiss', 2000);
-        console.log(err);
-      });
+      }
 
   }
 

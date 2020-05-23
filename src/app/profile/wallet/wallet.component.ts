@@ -21,8 +21,6 @@ export class WalletComponent implements OnInit {
       data: {money: this.money}
     });
     dialogRef.afterClosed().subscribe( res => {
-      console.log('Dialog Closed');
-      console.log(res);
       this.moneyCard.emit(res);
     });
   }

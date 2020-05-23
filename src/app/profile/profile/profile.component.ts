@@ -15,45 +15,60 @@ export class ProfileComponent implements OnInit {
   selectedFile: File;
   BselectedFile: string;
   imgUrl: string;
-  currentUserLocal = this.auth.currentUserValue.type;
-  firstName = this.auth.currentUserValue.firstName;
-  lastName = this.auth.currentUserValue.lastName;
-  birth = this.auth.currentUserValue.birth;
-  gender = this.auth.currentUserValue.gender;
-  address = this.auth.currentUserValue.address;
-  district = this.auth.currentUserValue.district;
-  county = this.auth.currentUserValue.county;
-  nickname = this.auth.currentUserValue.nickname;
-  email = this.auth.currentUserValue.email;
-  card = this.auth.currentUserValue.card;
+  currentUserLocal: string;
+  firstName: string;
+  lastName: string;
+  birth: string;
+  gender: string;
+  address: string;
+  district: string;
+  county: string;
+  nickname: string;
+  email: string;
+  card: string;
   isNotClient = false;
 
   constructor(private api: ApiService, private snackBar: SnackBarComponent, private router: Router, private auth: AuthenticationService) {
-    this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
-    api.getAvatar()
-      .then(res => {
-        this.imgUrl = res.data.image;
-        api.meUser()
-          .then( Ures => {
-            Ures.data.token = this.auth.currentUserValue.token;
-            localStorage.removeItem('currentUser');
-            localStorage.setItem('currentUser', JSON.stringify(Ures.data));
-            auth.currentUserUpdate(Ures.data);
-            this.card = auth.currentUserValue.card;
+    if (!this.auth.currentUserValue) {
+      this.router.navigate(['/']);
+    } else {
+      this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
+      api.getAvatar()
+        .then(res => {
+          this.imgUrl = res.data.image;
+          api.meUser()
+            .then( Ures => {
+              Ures.data.token = this.auth.currentUserValue.token;
+              localStorage.removeItem('currentUser');
+              localStorage.setItem('currentUser', JSON.stringify(Ures.data));
+              auth.currentUserUpdate(Ures.data);
+              this.card = auth.currentUserValue.card;
 
-            if (Ures.data.type !== 'Client') {
-              this.isNotClient = true;
-            }
-          });
-      })
-      .catch(err => {
-        this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
-        this.auth.logout();
-        this.router.navigate(['/login']);
-      });
+              if (Ures.data.type !== 'Client') {
+                this.isNotClient = true;
+              }
+            });
+        })
+        .catch(err => {
+          this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
+          this.auth.logout();
+          this.router.navigate(['/login']);
+        });
+    }
   }
 
   ngOnInit(): void {
+    this.currentUserLocal = this.auth.currentUserValue.type;
+    this.firstName = this.auth.currentUserValue.firstName;
+    this.lastName = this.auth.currentUserValue.lastName;
+    this.birth = this.auth.currentUserValue.birth;
+    this.gender = this.auth.currentUserValue.gender;
+    this.address = this.auth.currentUserValue.address;
+    this.district = this.auth.currentUserValue.district;
+    this.county = this.auth.currentUserValue.county;
+    this.nickname = this.auth.currentUserValue.nickname;
+    this.email = this.auth.currentUserValue.email;
+    this.card = this.auth.currentUserValue.card;
   }
   updateMoney($event) {
     this.card = $event;

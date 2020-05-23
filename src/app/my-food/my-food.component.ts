@@ -19,8 +19,12 @@ export class MyFoodComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: SnackBarComponent,
     private auth: AuthenticationService,
-    private route: Router
-  ) { }
+    private router: Router,
+  ) {
+    if (!this.auth.currentUserValue) {
+      router.navigate(['/']);
+    }
+  }
 
 
 
@@ -32,7 +36,7 @@ export class MyFoodComponent implements OnInit {
       number: ['', Validators.required],
       date: ['', Validators.required],
       price: ['', Validators.required],
-  });
+    });
   }
 
   get f() { return this.newdishForm.controls; }
@@ -67,13 +71,13 @@ export class MyFoodComponent implements OnInit {
               localStorage.setItem('currentUser', JSON.stringify(res.data));
               this.auth.currentUserUpdate(res.data);
               if ( res.data.type === 'Client') {
-                this.route.navigate(['/']);
+                this.router.navigate(['/']);
               }
             })
             .catch( error => {
               console.log(error);
               this.auth.logout();
-              this.route.navigate(['/']);
+              this.router.navigate(['/']);
             });
         });
   }

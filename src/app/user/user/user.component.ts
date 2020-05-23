@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserRateDialogComponent} from '../user-rate-dialog/user-rate-dialog.component';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -25,7 +26,11 @@ export class UserComponent implements OnInit {
   card: any;
   rating: any;
 
-  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog, private router: Router, private auth: AuthenticationService) {
+    if (!this.auth.currentUserValue) {
+      router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe( params => {

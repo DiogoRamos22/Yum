@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { ApiService } from 'src/app/_services/api.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food',
@@ -17,7 +19,8 @@ export class FoodComponent implements OnInit {
     public api: ApiService,
     public snackBar: SnackBarComponent,
     public dialogRef: MatDialogRef<FoodComponent>,
-    public formBuilder: FormBuilder) {}
+    public formBuilder: FormBuilder) {
+    }
 
   ngOnInit() {
     this.quantityForm = this.formBuilder.group({

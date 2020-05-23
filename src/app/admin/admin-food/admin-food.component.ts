@@ -24,7 +24,6 @@ export class AdminFoodComponent implements OnInit {
   constructor(
     private api: ApiService,
     private snackBar: SnackBarComponent) {
-    // Create 100 users
   // Assign the data to the data source for the table to render
   }
 
