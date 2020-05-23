@@ -3,10 +3,13 @@
   <mat-tab label="Profile">
     <div class="card m-auto" style="width: 20rem;">
       <div>
-        <img class="card-img-top profile-img-height" [src]=imgUrl alt="Card image cap">
+        <img class="card-img-top profile-img-height" [src]=imgUrl alt="Card
+          image cap">
         <span>
-          <input class="m-1 mt-btn mt-2" type="file" (change)="onFileSelected($event)" style="width: 76%;">
-          <button class="m-1 mt-2 ml-4 p-1 pr-3 pl-3 button-box btn my-btn text-white" (click)="update()" [disabled]="!selectedFile">Update</button>
+          <input class="m-1 mt-btn mt-2" type="file"
+            (change)="onFileSelected($event)" style="width: 76%;">
+          <button class="m-1 mt-2 ml-4 p-1 pr-3 pl-3 button-box btn my-btn
+            text-white" (click)="update()" [disabled]="!selectedFile">Update</button>
         </span>
       </div>
       <div class="card-body">
@@ -14,7 +17,8 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Nickname: {{nickname}}</li>
-        <li class="list-group-item">Money: {{card}}€   <app-wallet (moneyCard)="updateMoney($event)"></app-wallet></li>
+        <li class="list-group-item">Money: {{card}}€ <app-wallet
+            (moneyCard)="updateMoney($event)"></app-wallet></li>
         <li class="list-group-item">E-mail: {{email}}</li>
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>
@@ -24,8 +28,8 @@
       </ul>
     </div>
   </mat-tab>
-  <div *ngIf="isNotClient; then dishes" ></div>
-  <ng-template  #dishes>
+  <div *ngIf="isNotClient; then dishes"></div>
+  <ng-template #dishes>
     <mat-tab label="My Dishes">
       <app-profile-food></app-profile-food>
     </mat-tab>
@@ -34,4 +38,3 @@
     <app-history></app-history>
   </mat-tab>
 </mat-tab-group>
-

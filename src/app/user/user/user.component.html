@@ -3,7 +3,8 @@
   <mat-tab label="Profile">
     <div class="card m-auto" style="width: 20rem;">
       <div>
-        <img class="card-img-top profile-img-height" [src]=imgUrl alt="Card image cap">
+        <img class="card-img-top profile-img-height" [src]=imgUrl alt="Card
+          image cap">
       </div>
       <div class="card-body">
         <h5 class="card-title">{{firstName}} {{lastName}}</h5>
@@ -14,7 +15,9 @@
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>
         <li class="list-group-item">District: {{district}}</li>
-        <li class="list-group-item"><button mat-button class="m-auto p-1 pr-3 pl-3 button-box btn my-btn text-white" (click)=rateVendor(userId)>Rate this vendor</button></li>
+        <li class="list-group-item"><button mat-button class="m-auto p-1 pr-3
+            pl-3 button-box btn my-btn text-white" (click)=rateVendor(userId)>Rate
+            this vendor</button></li>
       </ul>
     </div>
   </mat-tab>

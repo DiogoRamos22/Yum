@@ -1,9 +1,11 @@
 
-<mat-grid-list [cols]="breakpoint" rowHeight="550px" gutterSize="25px" (window:resize)="onResize($event)">
+<mat-grid-list [cols]="breakpoint" rowHeight="550px" gutterSize="25px"
+  (window:resize)="onResize($event)">
   <mat-grid-tile *ngFor="let dish of dishes">
     <mat-card [style.height.px]="height" class="my-shadow card-fix">
       <div class="card-fix-container">
-        <img class="card-img-height" mat-card-image src={{dish.img}} alt={{dish.name}}>
+        <img class="card-img-height" mat-card-image src={{dish.img}}
+          alt={{dish.name}}>
         <mat-card-content>
           <mat-card-title align="center">{{dish.name}}</mat-card-title>
           <p class="montserrat">

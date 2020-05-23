@@ -1,71 +1,72 @@
 <app-nav-bar></app-nav-bar>
 <div id="parent">
-    <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form class="container">
-        <h3 class="mt-5" id="formName"><hr/>Add your dish<hr/></h3>
-  
+  <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form
+    class="container">
+    <h3 class="mt-5" id="formName"><hr/>Add your dish<hr/></h3>
+
         <div>
-            <label>
+          <label>
             Dish Name:
-            <input type="text" formControlName="name">     
-            </label>
+            <input type="text" formControlName="name">
+          </label>
         </div>
         <div id="foto">
-            <input type="file" (change)="onFileSelected($event)">
+          <input type="file" (change)="onFileSelected($event)">
         </div>
         <div>
-            <span>
-                <label>
-                Food type:
-                </label>
-                <select formControlName="type">
-                <option>
-                    Pizza
-                </option>
-                <option>
-                    Sushi
-                </option>
-                <option>
-                    Fast Food
-                </option>
-                <option>
-                    Desserts
-                </option>
-                <option>
-                    Healthy
-                </option>
-                <option>
-                    Traditional
-                </option>
-            </select>
-            </span>
-            
-        </div>
-        <div>
+          <span>
             <label>
+              Food type:
+            </label>
+            <select formControlName="type">
+              <option>
+                Pizza
+              </option>
+              <option>
+                Sushi
+              </option>
+              <option>
+                Fast Food
+              </option>
+              <option>
+                Desserts
+              </option>
+              <option>
+                Healthy
+              </option>
+              <option>
+                Traditional
+              </option>
+            </select>
+          </span>
+
+        </div>
+        <div>
+          <label>
             Ingredients:
             <input type="text" formControlName="ingredients">
-            </label>
+          </label>
         </div>
         <div>
-            <label>
+          <label>
             Number of dishes:
-            </label>
-            <input type="number" formControlName="number">
+          </label>
+          <input type="number" formControlName="number">
         </div>
         <div>
-            <label>
+          <label>
             Date:
             <input type="date" formControlName="date">
-            </label>
+          </label>
         </div>
         <div>
-            <label>
+          <label>
             Price:
             <input type="number" formControlName="price">
-            </label>
+          </label>
         </div>
         <div id="butao">
-            <button type="submit" [disabled]="!newdishForm.valid">Add dish</button>
-         </div>
-    </form>  
-</div>
+          <button type="submit" [disabled]="!newdishForm.valid">Add dish</button>
+        </div>
+      </form>
+    </div>
