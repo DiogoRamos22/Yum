@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -8,6 +8,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./wallet.component.css'],
 })
 export class WalletComponent implements OnInit {
+  @Output() moneyCard = new EventEmitter<any>();
   money: number;
   constructor(
     public dialog: MatDialog
@@ -21,7 +22,8 @@ export class WalletComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe( res => {
       console.log('Dialog Closed');
-      this.money = res;
+      console.log(res);
+      this.moneyCard.emit(res);
     });
   }
 

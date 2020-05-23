@@ -9,11 +9,12 @@ export class User {
     address?: string;
     district?: string;
     county?: string;
-    username: string;
+    nickname: string;
     email?: string;
     password: string;
     confirmPassword?: string;
     token?: string;
     role: Role;
+    card: string;
     type: string;
 }

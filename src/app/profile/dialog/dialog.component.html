@@ -3,7 +3,6 @@
   <form [formGroup]="moneyForm" (ngSubmit)="onSubmit()">
     <input class="user-box mt-3 mb-3 my-btn form-control" type="number" placeholder="money" name="Money" id="money" formControlName="money">
     <div mat-dialog-actions>
-      <button mat-button class="m-auto p-1 pr-3 pl-3 button-box btn my-btn text-white" type="button" (click)="onCloseClick()">No Thanks</button>
       <button mat-button class="m-auto p-1 pr-3 pl-3 button-box btn my-btn text-white" type="submit">Add</button>
     </div>
   </form>

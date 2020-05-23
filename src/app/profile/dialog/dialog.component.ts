@@ -3,6 +3,8 @@ import { ApiService } from 'src/app/_services/api.service';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+
 
 @Component({
   selector: 'app-dialog',
@@ -11,24 +13,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   providers: [SnackBarComponent]
 })
 export class DialogComponent implements OnInit {
-
   moneyForm: FormGroup;
-
   constructor(
     public api: ApiService,
     public snackBar: SnackBarComponent,
     public dialogRef: MatDialogRef<DialogComponent>,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private auth: AuthenticationService
     ) {}
 
   ngOnInit() {
     this.moneyForm = this.formBuilder.group({
       money: ['']
     });
-  }
-
-  onCloseClick(): void {
-    this.dialogRef.close();
   }
 
   get f() { return this.moneyForm.controls; }
@@ -42,6 +39,10 @@ export class DialogComponent implements OnInit {
     this.api.addMoney(value)
       .then( res => {
         this.snackBar.openSnackBar('Money added sucessfully', 'Dismiss', 2000);
+        this.api.meUser()
+          .then( Ures => {
+            this.dialogRef.close(Ures.data.card);
+          });
       })
       .catch( err => {
         console.log(err);

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../_services/api.service';
 import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,20 +12,20 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
   providers: [SnackBarComponent]
 })
 export class ProfileComponent implements OnInit {
-  currentUserLocal;
   selectedFile: File;
   BselectedFile: string;
   imgUrl: string;
-  firstName: string;
-  lastName: string;
-  birth: string;
-  gender: string;
-  address: string;
-  district: string;
-  county: string;
-  nickname: string;
-  email: string;
-  card: string;
+  currentUserLocal = this.auth.currentUserValue.type;
+  firstName = this.auth.currentUserValue.firstName;
+  lastName = this.auth.currentUserValue.lastName;
+  birth = this.auth.currentUserValue.birth;
+  gender = this.auth.currentUserValue.gender;
+  address = this.auth.currentUserValue.address;
+  district = this.auth.currentUserValue.district;
+  county = this.auth.currentUserValue.county;
+  nickname = this.auth.currentUserValue.nickname;
+  email = this.auth.currentUserValue.email;
+  card = this.auth.currentUserValue.card;
   isNotClient = false;
 
   constructor(private api: ApiService, private snackBar: SnackBarComponent, private router: Router, private auth: AuthenticationService) {
@@ -32,22 +33,18 @@ export class ProfileComponent implements OnInit {
     api.getAvatar()
       .then(res => {
         this.imgUrl = res.data.image;
-        this.currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
-        this.firstName = this.currentUserLocal.firstName;
-        this.lastName = this.currentUserLocal.lastName;
-        this.birth = this.currentUserLocal.birth;
-        this.gender = this.currentUserLocal.gender;
-        this.address = this.currentUserLocal.address;
-        this.district = this.currentUserLocal.district;
-        this.county = this.currentUserLocal.county;
-        this.nickname = this.currentUserLocal.nickname;
-        this.email = this.currentUserLocal.email;
-        this.card = this.currentUserLocal.card;
+        api.meUser()
+          .then( Ures => {
+            Ures.data.token = this.auth.currentUserValue.token;
+            localStorage.removeItem('currentUser');
+            localStorage.setItem('currentUser', JSON.stringify(Ures.data));
+            auth.currentUserUpdate(Ures.data);
+            this.card = auth.currentUserValue.card;
 
-        if (this.currentUserLocal.type !== 'Client') {
-          this.isNotClient = true;
-        }
-
+            if (Ures.data.type !== 'Client') {
+              this.isNotClient = true;
+            }
+          });
       })
       .catch(err => {
         this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
@@ -57,6 +54,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  updateMoney($event) {
+    this.card = $event;
   }
 
   onFileSelected(event) {

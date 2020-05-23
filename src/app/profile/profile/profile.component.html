@@ -14,7 +14,7 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Nickname: {{nickname}}</li>
-        <li class="list-group-item">Money: {{card}}€   <app-wallet></app-wallet></li>
+        <li class="list-group-item">Money: {{card}}€   <app-wallet (moneyCard)="updateMoney($event)"></app-wallet></li>
         <li class="list-group-item">E-mail: {{email}}</li>
         <li class="list-group-item">Date of birth: {{birth}}</li>
         <li class="list-group-item">Gender: {{gender}}</li>
