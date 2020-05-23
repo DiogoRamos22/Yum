@@ -3,11 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
 import { FoodComponent } from 'src/app/food/food/food.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-user-food',
   templateUrl: './user-food.component.html',
-  styleUrls: ['./user-food.component.scss']
+  styleUrls: ['./user-food.component.scss'],
+  providers: [SnackBarComponent]
 })
 export class UserFoodComponent implements OnInit {
   breakpoint: number;
@@ -16,18 +18,24 @@ export class UserFoodComponent implements OnInit {
   dishes: any;
   quantity: any;
 
-  constructor(private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog) {
-    this.route.params.subscribe( params => {
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiService,
+    public dialog: MatDialog,
+    public snackbar: SnackBarComponent
+  ) {
+    this.route.params.subscribe((params) => {
       this.userId = params.userId;
-      this.api.getUserDishes(this.userId)
-        .then( res => {
+      this.api
+        .getUserDishes(this.userId)
+        .then((res) => {
           this.dishes = res.data;
         })
-        .catch( err => {
-          console.log(err);
+        .catch((err) => {
+          this.snackbar.openSnackBar('Couldn\'t load dishes', 'Dismiss', 2000);
         });
     });
-   }
+  }
 
   ngOnInit(): void {
     if (window.innerWidth <= 1300) {
@@ -66,7 +74,6 @@ export class UserFoodComponent implements OnInit {
     } else {
       this.breakpoint = 4;
       this.height = 500;
-
     }
   }
 
@@ -75,13 +82,11 @@ export class UserFoodComponent implements OnInit {
       width: '350px',
       data: {
         quantity: this.quantity,
-        id
-      }
+        id,
+      },
     });
-    dialogRef.afterClosed().subscribe( res => {
-      console.log('Dialog Closed');
+    dialogRef.afterClosed().subscribe((res) => {
       this.quantity = res;
     });
   }
-
 }

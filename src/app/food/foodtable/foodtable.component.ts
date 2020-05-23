@@ -10,7 +10,6 @@ import { FoodComponent } from '../food/food.component';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
-
 export interface FoodData {
   created_at: string;
   date: string;
@@ -32,7 +31,7 @@ export interface FoodData {
   selector: 'app-foodtable',
   templateUrl: './foodtable.component.html',
   styleUrls: ['./foodtable.component.scss'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class FoodtableComponent implements OnInit {
   search: string;
@@ -41,13 +40,20 @@ export class FoodtableComponent implements OnInit {
   dishes: FoodData[];
   dataArray: MatTableDataSource<FoodData>;
   typeOfDishChosen: string;
-  typeDishes: string[] = ['All', 'Pizza', 'Sushi', 'Fast food', 'Desserts', 'Healthy', 'Traditional'];
+  typeDishes: string[] = [
+    'All',
+    'Pizza',
+    'Sushi',
+    'Fast food',
+    'Desserts',
+    'Healthy',
+    'Traditional',
+  ];
   searchDish: any;
   quantity: string;
   foodId: string;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -55,53 +61,59 @@ export class FoodtableComponent implements OnInit {
     public dialog: MatDialog,
     private snackBar: SnackBarComponent,
     private auth: AuthenticationService,
-    private router: Router) {
-      if (!this.auth.currentUserValue) {
-        this.router.navigate(['/']);
-      } else {
-        this.snackBar.openSnackBar('Loading dishes...', 'Dismiss', 2000);
-        this.api.getAllDishes()
-          .then( res => {
-            console.log(res.data)
-            const food: FoodData[] = [];
-            // tslint:disable-next-line: prefer-for-of
-            for (let i = 0; i < res.data.length; i++) {
-              food.push(this.convertData(res.data[i]));
-            }
+    private router: Router
+  ) {
+    if (!this.auth.currentUserValue) {
+      this.router.navigate(['/']);
+    } else {
+      this.snackBar.openSnackBar(
+        'Loading dishes...',
+        'Dismiss',
+        2000
+      );
+      this.api
+        .getAllDishes()
+        .then((res) => {
+          const food: FoodData[] = [];
+          // tslint:disable-next-line: prefer-for-of
+          for (let i = 0; i < res.data.length; i++) {
+            food.push(this.convertData(res.data[i]));
+          }
 
-            this.dataArray = new MatTableDataSource(food);
-            this.dataArray.filterPredicate = (data: FoodData, filters: string) => {
-              const matchFilter = [];
-              const filterArray = filters.split('+');
-              const columns = (Object as any).values(data);
-              filterArray.forEach(filter => {
-                const customFilter = [];
-                columns.forEach(column => {
-                  customFilter.push(column.toLowerCase().includes(filter));
-                });
-                matchFilter.push(customFilter.some(Boolean));
+          this.dataArray = new MatTableDataSource(food);
+          this.dataArray.filterPredicate = (
+            data: FoodData,
+            filters: string
+          ) => {
+            const matchFilter = [];
+            const filterArray = filters.split('+');
+            const columns = (Object as any).values(data);
+            filterArray.forEach((filter) => {
+              const customFilter = [];
+              columns.forEach((column) => {
+                customFilter.push(column.toLowerCase().includes(filter));
               });
-              return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
-            };
-            this.dataArray.paginator = this.paginator;
-            this.dataArray.sort = this.sort;
-
-
-            this.route.queryParams
-            .subscribe(params => {
-              this.dataArray.filter = params.search.trim().toLowerCase();
-
-              this.dishes = this.dataArray.filteredData;
-
+              matchFilter.push(customFilter.some(Boolean));
             });
-          })
-          .catch( err => {
-            this.snackBar.openSnackBar('Error while loading dishes', 'Dismiss', 2000);
-            console.log(err);
+            return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
+          };
+          this.dataArray.paginator = this.paginator;
+          this.dataArray.sort = this.sort;
+
+          this.route.queryParams.subscribe((params) => {
+            this.dataArray.filter = params.search.trim().toLowerCase();
+
+            this.dishes = this.dataArray.filteredData;
           });
-
-      }
-
+        })
+        .catch((err) => {
+          this.snackBar.openSnackBar(
+            'Error while loading dishes',
+            'Dismiss',
+            2000
+          );
+        });
+    }
   }
 
   convertData(data): FoodData {
@@ -123,29 +135,28 @@ export class FoodtableComponent implements OnInit {
       updated_at: data.updated_at,
       userId: data.userId,
       firstName: data.firstName,
-      lastName: data.lastName
+      lastName: data.lastName,
     };
   }
 
   ngOnInit(): void {
     if (window.innerWidth <= 1300) {
-        if (window.innerWidth <= 750) {
-          if (window.innerWidth <= 500) {
-            this.breakpoint = 1;
-            this.height = 350;
-          } else {
-            this.breakpoint = 2;
-            this.height = 450;
-          }
+      if (window.innerWidth <= 750) {
+        if (window.innerWidth <= 500) {
+          this.breakpoint = 1;
+          this.height = 350;
         } else {
-          this.breakpoint = 3;
-          this.height = 500;
+          this.breakpoint = 2;
+          this.height = 450;
         }
       } else {
-        this.breakpoint = 4;
+        this.breakpoint = 3;
         this.height = 500;
       }
-
+    } else {
+      this.breakpoint = 4;
+      this.height = 500;
+    }
   }
 
   onResize(event) {
@@ -165,7 +176,6 @@ export class FoodtableComponent implements OnInit {
     } else {
       this.breakpoint = 4;
       this.height = 500;
-
     }
   }
   buyFood(id) {
@@ -173,37 +183,46 @@ export class FoodtableComponent implements OnInit {
       width: '350px',
       data: {
         quantity: this.quantity,
-        id
-      }
+        id,
+      },
     });
-    dialogRef.afterClosed().subscribe( res => {
+    dialogRef.afterClosed().subscribe((res) => {
       console.log('Dialog Closed');
       this.quantity = res;
     });
   }
-  applyFilter(radioChange: MatRadioChange) {
-    if (this.typeOfDishChosen !== 'All' && this.searchDish !== undefined && this.searchDish !== '') {
-      this.dataArray.filter = this.typeOfDishChosen.trim().toLowerCase() + '+' + this.searchDish.trim().toLowerCase();
+  applyFilter() {
+    if (
+      this.typeOfDishChosen !== 'All' &&
+      this.searchDish !== undefined &&
+      this.searchDish !== ''
+    ) {
+      this.dataArray.filter =
+        this.typeOfDishChosen.trim().toLowerCase() +
+        '+' +
+        this.searchDish.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
-    // tslint:disable-next-line: max-line-length
-    } else if ((this.searchDish === undefined && this.typeOfDishChosen === 'All') || (this.searchDish === '' && this.typeOfDishChosen === 'All') ) {
+      // tslint:disable-next-line: max-line-length
+    } else if (
+      (this.searchDish === undefined && this.typeOfDishChosen === 'All') ||
+      (this.searchDish === '' && this.typeOfDishChosen === 'All')
+    ) {
       this.dataArray.filter = '';
       this.dishes = this.dataArray.filteredData;
     } else if (this.searchDish === '') {
       this.dataArray.filter = this.typeOfDishChosen.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
-     } else if (this.typeOfDishChosen === 'All') {
+    } else if (this.typeOfDishChosen === 'All') {
       this.dataArray.filter = this.searchDish.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
-     } else {
+    } else {
       this.dataArray.filter = this.typeOfDishChosen.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
     }
   }
   applySearch(event) {
-
     const filterValue = (event.target as HTMLInputElement).value;
-    if ( this.typeOfDishChosen === undefined) {
+    if (this.typeOfDishChosen === undefined) {
       this.dataArray.filter = filterValue.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
     } else if (filterValue === '' && this.typeOfDishChosen === 'All') {
@@ -213,10 +232,11 @@ export class FoodtableComponent implements OnInit {
       this.dataArray.filter = filterValue.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
     } else {
-      this.dataArray.filter = this.typeOfDishChosen.trim().toLowerCase() + '+' + filterValue.trim().toLowerCase();
+      this.dataArray.filter =
+        this.typeOfDishChosen.trim().toLowerCase() +
+        '+' +
+        filterValue.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
-
     }
-
   }
 }

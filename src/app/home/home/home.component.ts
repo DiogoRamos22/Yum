@@ -6,20 +6,20 @@ import { AuthenticationService } from '../../_services/authentication.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-    loading = false;
-    currentUser: User;
-    userFromApi: User;
-    isLogged = true;
+  loading = false;
+  currentUser: User;
+  userFromApi: User;
+  isLogged = true;
 
-    constructor( private authenticationService: AuthenticationService) {
-      this.currentUser = this.authenticationService.currentUserValue;
-    }
+  constructor(private authenticationService: AuthenticationService) {
+    this.currentUser = this.authenticationService.currentUserValue;
+  }
 
-    // tslint:disable-next-line: use-lifecycle-interface
-    ngOnInit() {
-        this.loading = true;
-    }
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnInit() {
+    this.loading = true;
+  }
 }

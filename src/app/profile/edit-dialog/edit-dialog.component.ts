@@ -8,10 +8,9 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-edit-dialog',
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class EditDialogComponent implements OnInit {
-
   numberForm: FormGroup;
 
   constructor(
@@ -19,13 +18,13 @@ export class EditDialogComponent implements OnInit {
     public snackBar: SnackBarComponent,
     public dialogRef: MatDialogRef<EditDialogComponent>,
     public formBuilder: FormBuilder
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.numberForm = this.formBuilder.group({
       quantity: [''],
       dishId: this.dialogRef._containerInstance._config.data.dishId,
-      date: ['']
+      date: [''],
     });
   }
 
@@ -33,14 +32,34 @@ export class EditDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  get f() { return this.numberForm.controls; }
+  get f() {
+    return this.numberForm.controls;
+  }
 
-  onSubmit() { this.editDish(this.f.dishId.value, this.f.quantity.value, this.f.date.value); }
+  onSubmit() {
+    this.editDish(
+      this.f.dishId.value,
+      this.f.quantity.value,
+      this.f.date.value
+    );
+  }
 
   editDish(id, amount, date) {
-    this.api.editDish(date, id, amount.toString())
-    .then(res => {
-      console.log(res);
-    });
+    this.api
+    .editDish(date, id, amount.toString())
+      .then((res) => {
+        this.snackBar.openSnackBar(
+          'Dish edited successfully',
+          'Dismiss',
+          2000
+        );
+      })
+      .catch(err => {
+        this.snackBar.openSnackBar(
+          'Something went wrong... Try again',
+          'Dismiss',
+          2000
+        );
+      })
   }
 }

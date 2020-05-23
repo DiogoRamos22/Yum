@@ -7,7 +7,7 @@ import { SnackBarComponent } from '../../snack-bar/snack-bar.component';
   selector: 'app-logged-in',
   templateUrl: './logged-in.component.html',
   styleUrls: ['./logged-in.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class LoggedInComponent implements OnInit {
   isVendor = false;
@@ -15,20 +15,20 @@ export class LoggedInComponent implements OnInit {
     private auth: AuthenticationService,
     private router: Router,
     private snackBar: SnackBarComponent
+  ) {
+    if (
+      this.auth.currentUserValue.type === 'Vendor' ||
+      this.auth.currentUserValue.type === 'Both'
     ) {
-      if(this.auth.currentUserValue.type === 'Vendor' || this.auth.currentUserValue.type === 'Both') {
-        this.isVendor = true;
-      }
-     }
-
-  ngOnInit(): void {
-
+      this.isVendor = true;
+    }
   }
+
+  ngOnInit(): void {}
 
   logout() {
     this.snackBar.openSnackBar('Signing out...', 'Dismiss', 1000);
     this.auth.logout();
     this.router.navigate(['/login']);
   }
-
 }

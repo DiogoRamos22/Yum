@@ -5,12 +5,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
-
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class DialogComponent implements OnInit {
   moneyForm: FormGroup;
@@ -20,32 +19,46 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     public formBuilder: FormBuilder,
     private auth: AuthenticationService
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.moneyForm = this.formBuilder.group({
-      money: ['']
+      money: [''],
     });
   }
 
-  get f() { return this.moneyForm.controls; }
+  get f() {
+    return this.moneyForm.controls;
+  }
 
   onSubmit() {
-    this.snackBar.openSnackBar('Adding money ...', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Adding money...',
+      'Dismiss',
+      1000
+    );
     this.addMoney(this.f.money.value);
   }
 
   addMoney(value) {
-    this.api.addMoney(value)
-      .then( res => {
-        this.snackBar.openSnackBar('Money added sucessfully', 'Dismiss', 2000);
-        this.api.meUser()
-          .then( Ures => {
-            this.dialogRef.close(Ures.data.card);
-          });
+    this.api
+      .addMoney(value)
+      .then((res) => {
+        this.snackBar.openSnackBar(
+          'Money added sucessfully',
+          'Dismiss',
+          2000
+        );
+        this.api.meUser().then((Ures) => {
+          this.dialogRef.close(Ures.data.card);
+        });
       })
-      .catch( err => {
-        console.log(err);
+      .catch((err) => {
+        this.snackBar.openSnackBar(
+          'Something went wrong... Try again',
+          'Dismiss',
+          2000
+        );
       });
   }
 }

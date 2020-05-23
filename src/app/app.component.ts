@@ -24,9 +24,4 @@ export class AppComponent {
   get isAdmin() {
       return this.currentUser && this.currentUser.role === Role.Admin;
   }
-
-  logout() {
-      this.authenticationService.logout();
-      this.router.navigate(['/login']);
-  }
 }

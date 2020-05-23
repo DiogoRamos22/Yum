@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ApiService {
-
   config: AxiosRequestConfig = {
     baseURL: 'http://yum-app.online',
     timeout: 10000,
     responseType: 'json',
     validateStatus: (status: number) => status >= 200 && status < 300,
-    maxRedirects: 5
+    maxRedirects: 5,
   };
 
   handleResponse = (response: AxiosResponse) => response.data;
@@ -20,18 +18,18 @@ export class ApiService {
   handleError = (error: AxiosError) => error;
 
   loginUser(email: string, password: string) {
-    return axios.post('/api/auth/login', { email, password}, this.config);
+    return axios.post('/api/auth/login', { email, password }, this.config);
   }
 
   registerUser(data: JSON) {
-    return axios.post('/api/auth/signup', data , this.config);
+    return axios.post('/api/auth/signup', data, this.config);
   }
 
   logoutUser() {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/auth/logout', {}, this.config);
   }
@@ -40,9 +38,9 @@ export class ApiService {
     const token = this.getToken();
     if (token != null) {
       this.config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
-    };
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      };
       return axios.get('/api/auth/me', this.config);
     }
   }
@@ -53,7 +51,7 @@ export class ApiService {
     formData.append('avatar', avatar);
     this.config.headers = {
       'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/updateAvatar', formData, this.config);
   }
@@ -62,7 +60,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/avatar', this.config);
   }
@@ -71,7 +69,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/admin/isAdmin', this.config);
   }
@@ -80,7 +78,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/admin/GetAllUsers', this.config);
   }
@@ -97,7 +95,7 @@ export class ApiService {
     formData.append('price', price);
     this.config.headers = {
       'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/addDish', formData, this.config);
   }
@@ -106,7 +104,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/getAllDishes', this.config);
   }
@@ -118,7 +116,7 @@ export class ApiService {
 
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/getUserDishes', formData, this.config);
   }
@@ -127,7 +125,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/GetAllHistory', this.config);
   }
@@ -135,7 +133,7 @@ export class ApiService {
     const token = this.getToken();
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.get('/api/getHistoryCurrentUser', this.config);
   }
@@ -146,7 +144,7 @@ export class ApiService {
     formData.append('newType', type);
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/changeType', formData, this.config);
   }
@@ -157,7 +155,7 @@ export class ApiService {
     formData.append('money', value);
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/addMoney', formData, this.config);
   }
@@ -171,7 +169,7 @@ export class ApiService {
 
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/buyDish', formData, this.config);
   }
@@ -185,7 +183,7 @@ export class ApiService {
 
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/editDish', formData, this.config);
   }
@@ -199,7 +197,7 @@ export class ApiService {
 
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/rateVendor', formData, this.config);
   }
@@ -211,7 +209,7 @@ export class ApiService {
 
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/userInfo', formData, this.config);
   }
@@ -223,11 +221,10 @@ export class ApiService {
     formData.append('points', rating);
     this.config.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     };
     return axios.post('/api/rateDish', formData, this.config);
   }
-
 
   getToken(): string {
     const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));

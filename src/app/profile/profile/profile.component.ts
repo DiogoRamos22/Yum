@@ -9,7 +9,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class ProfileComponent implements OnInit {
   selectedFile: File;
@@ -28,29 +28,42 @@ export class ProfileComponent implements OnInit {
   card: string;
   isNotClient = false;
 
-  constructor(private api: ApiService, private snackBar: SnackBarComponent, private router: Router, private auth: AuthenticationService) {
+  constructor(
+    private api: ApiService,
+    private snackBar: SnackBarComponent,
+    private router: Router,
+    private auth: AuthenticationService
+  ) {
     if (!this.auth.currentUserValue) {
       this.router.navigate(['/']);
     } else {
-      this.snackBar.openSnackBar('Loading profile', 'Dismiss', 2000);
-      api.getAvatar()
-        .then(res => {
+      this.snackBar.openSnackBar(
+        'Loading profile',
+        'Dismiss',
+        2000
+      );
+      api
+        .getAvatar()
+        .then((res) => {
           this.imgUrl = res.data.image;
-          api.meUser()
-            .then( Ures => {
-              Ures.data.token = this.auth.currentUserValue.token;
-              localStorage.removeItem('currentUser');
-              localStorage.setItem('currentUser', JSON.stringify(Ures.data));
-              auth.currentUserUpdate(Ures.data);
-              this.card = auth.currentUserValue.card;
+          api.meUser().then((Ures) => {
+            Ures.data.token = this.auth.currentUserValue.token;
+            localStorage.removeItem('currentUser');
+            localStorage.setItem('currentUser', JSON.stringify(Ures.data));
+            auth.currentUserUpdate(Ures.data);
+            this.card = auth.currentUserValue.card;
 
-              if (Ures.data.type !== 'Client') {
-                this.isNotClient = true;
-              }
-            });
+            if (Ures.data.type !== 'Client') {
+              this.isNotClient = true;
+            }
+          });
         })
-        .catch(err => {
-          this.snackBar.openSnackBar('Error while loading profile', 'Dismiss', 2000);
+        .catch((err) => {
+          this.snackBar.openSnackBar(
+            'Error while loading profile',
+            'Dismiss',
+            2000
+          );
           this.auth.logout();
           this.router.navigate(['/login']);
         });
@@ -76,26 +89,43 @@ export class ProfileComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
-    this.snackBar.openSnackBar('Image selected successfully', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Image selected successfully',
+      'Dismiss',
+      2000
+    );
   }
 
   update() {
     if (this.selectedFile) {
-      this.api.uploadAvatar(this.selectedFile)
-        .then(res => {
+      this.api
+        .uploadAvatar(this.selectedFile)
+        .then((res) => {
           console.log(res);
-          this.api.getAvatar()
-            .then( res => {
-              this.snackBar.openSnackBar('Image updated successfully', 'Dismiss', 2000);
-              this.imgUrl = res.data.image;
+          this.api
+            .getAvatar()
+            .then((Ares) => {
+              this.snackBar.openSnackBar(
+                'Image updated successfully',
+                'Dismiss',
+                2000
+              );
+              this.imgUrl = Ares.data.image;
             })
-            .catch(err => {
-              this.snackBar.openSnackBar('Error', 'Dismiss', 2000);
-              console.log(err);
+            .catch((err) => {
+              this.snackBar.openSnackBar(
+                'Error',
+                'Dismiss',
+                2000
+              );
             });
         })
-        .catch(err => {
-          console.log(err);
+        .catch((err) => {
+          this.snackBar.openSnackBar(
+            'Something went wrong... Try again',
+            'Dismiss',
+            2000
+          );
         });
     }
   }

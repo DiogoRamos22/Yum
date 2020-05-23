@@ -10,19 +10,15 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class WalletComponent implements OnInit {
   @Output() moneyCard = new EventEmitter<any>();
   money: number;
-  constructor(
-    public dialog: MatDialog
-  ) { }
-  ngOnInit() {
-  }
+  constructor(public dialog: MatDialog) {}
+  ngOnInit() {}
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '350px',
-      data: {money: this.money}
+      data: { money: this.money },
     });
-    dialogRef.afterClosed().subscribe( res => {
+    dialogRef.afterClosed().subscribe((res) => {
       this.moneyCard.emit(res);
     });
   }
-
 }

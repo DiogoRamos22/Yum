@@ -9,11 +9,11 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   selector: 'app-admin-history',
   templateUrl: './admin-history.component.html',
   styleUrls: ['./admin-history.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class AdminHistoryComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   loading = false;
   dataSource: MatTableDataSource<unknown>;
   history: {
@@ -25,25 +25,40 @@ export class AdminHistoryComponent implements OnInit {
     amountPaid: string;
     created_at: string;
   };
-  displayedColumns: string[] = ['id', 'idDish', 'idSeller', 'idCostumer', 'number', 'amountPaid', 'created_at'];
+  displayedColumns: string[] = [
+    'id',
+    'idDish',
+    'idSeller',
+    'idCostumer',
+    'number',
+    'amountPaid',
+    'created_at',
+  ];
 
-  constructor(
-    private api: ApiService,
-    private snackBar: SnackBarComponent) { }
+  constructor(private api: ApiService, private snackBar: SnackBarComponent) {}
 
   ngOnInit(): void {
-    this.snackBar.openSnackBar('Loading history...', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Loading history...',
+      'Dismiss',
+      2000
+    );
     this.loading = true;
-    this.api.GetAllHistory()
-      .then(history => {
+    this.api
+      .GetAllHistory()
+      .then((history) => {
         this.loading = false;
         this.history = history.data;
         this.dataSource = new MatTableDataSource(history.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-      .catch( err => {
-        this.snackBar.openSnackBar('Error while loading history', 'Dismiss', 2000);
+      .catch((err) => {
+        this.snackBar.openSnackBar(
+          'Error while loading history',
+          'Dismiss',
+          2000
+        );
         this.loading = false;
         console.log(err);
       });
@@ -56,5 +71,4 @@ export class AdminHistoryComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-food',
   templateUrl: './food.component.html',
   styleUrls: ['./food.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class FoodComponent implements OnInit {
   quantityForm: FormGroup;
@@ -19,14 +19,14 @@ export class FoodComponent implements OnInit {
     public api: ApiService,
     public snackBar: SnackBarComponent,
     public dialogRef: MatDialogRef<FoodComponent>,
-    public formBuilder: FormBuilder) {
-    }
+    public formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.quantityForm = this.formBuilder.group({
       quantity: [''],
       id: this.dialogRef._containerInstance._config.data.id,
-      datetime: ['']
+      datetime: [''],
     });
   }
 
@@ -34,23 +34,35 @@ export class FoodComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  get f() { return this.quantityForm.controls; }
+  get f() {
+    return this.quantityForm.controls;
+  }
 
   onSubmit() {
-    this.snackBar.openSnackBar('Buying dish...', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Buying dish...',
+      'Dismiss',
+      2000
+    );
     this.buyDish(this.f.id.value, this.f.quantity.value, this.f.datetime.value);
   }
 
   buyDish(id, amount, deliveryDate) {
-    console.log(deliveryDate)
-    this.api.buyDish(id, amount, deliveryDate)
-      .then( res => {
-        console.log(res);
+    this.api
+      .buyDish(id, amount, deliveryDate)
+      .then((res) => {
+        this.snackBar.openSnackBar(
+          'Dish bought successfully',
+          'Dismiss',
+          2000
+        );
       })
-      .catch( err => {
-        this.snackBar.openSnackBar('Error while buying dish', 'Dismiss', 2000);
-        console.log(err);
+      .catch((err) => {
+        this.snackBar.openSnackBar(
+          'Error while buying dish',
+          'Dismiss',
+          2000
+        );
       });
   }
-
 }

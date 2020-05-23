@@ -5,14 +5,14 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 @Component({
   selector: 'app-foodtype',
   templateUrl: './foodtype.component.html',
-  styleUrls: ['./foodtype.component.scss']
+  styleUrls: ['./foodtype.component.scss'],
 })
 export class FoodtypeComponent implements OnInit {
   breakpoint: number;
   height: number;
   isLogged = false;
 
-  constructor(private router: Router, private auth: AuthenticationService ) {
+  constructor(private router: Router, private auth: AuthenticationService) {
     if (this.auth.currentUserValue) {
       this.isLogged = true;
     }
@@ -35,9 +35,7 @@ export class FoodtypeComponent implements OnInit {
     } else {
       this.breakpoint = 6;
       this.height = 400;
-
     }
-
   }
   onResize(event) {
     if (event.target.innerWidth <= 1300) {
@@ -56,15 +54,13 @@ export class FoodtypeComponent implements OnInit {
     } else {
       this.breakpoint = 6;
       this.height = 400;
-
     }
   }
   redirect(typeFood) {
-    if (this.isLogged){
+    if (this.isLogged) {
       this.router.navigate(['/food'], { queryParams: { search: typeFood } });
     } else {
       this.router.navigate(['/login']);
     }
   }
-
 }

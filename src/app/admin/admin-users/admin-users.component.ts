@@ -10,44 +10,67 @@ import { MatSort } from '@angular/material/sort';
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.css'],
-  providers: [SnackBarComponent]
+  providers: [SnackBarComponent],
 })
 export class AdminUsersComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   loading = false;
   users: User[] = [];
   dataSource;
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birth', 'gender', 'address', 'district', 'county', 'nickname', 'email'];
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'birth',
+    'gender',
+    'address',
+    'district',
+    'county',
+    'nickname',
+    'email',
+  ];
 
   constructor(
     private userService: UserService,
-    private snackBar: SnackBarComponent) { }
+    private snackBar: SnackBarComponent
+  ) {}
 
   ngOnInit(): void {
-    this.snackBar.openSnackBar('Loading users...', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Loading users...',
+      'Dismiss',
+      2000
+    );
     this.loading = true;
-    this.userService.getAll()
-      .then(users => {
+    this.userService
+      .getAll()
+      .then((users) => {
         this.loading = false;
         this.users = users.data;
         this.dataSource = new MatTableDataSource(users.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-      .catch( err => {
-        this.snackBar.openSnackBar('Error while loading users', 'Dismiss', 2000);
+      .catch((err) => {
+        this.snackBar.openSnackBar(
+          'Error while loading users',
+          'Dismiss',
+          2000
+        );
         this.loading = false;
-        console.log(err);
       });
   }
   applyFilter(event: Event) {
-    this.snackBar.openSnackBar('Filtering...', 'Dismiss', 2000);
+    this.snackBar.openSnackBar(
+      'Filtering...',
+      'Dismiss',
+      2000
+    );
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }
