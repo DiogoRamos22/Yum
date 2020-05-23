@@ -33,9 +33,9 @@ export class DialogComponent implements OnInit {
 
   get f() { return this.moneyForm.controls; }
 
-  onSubmit() { 
+  onSubmit() {
     this.snackBar.openSnackBar('Adding money ...', 'Dismiss', 2000);
-    this.addMoney(this.f.money.value); 
+    this.addMoney(this.f.money.value);
   }
 
   addMoney(value) {

@@ -40,7 +40,7 @@ export class EditDialogComponent implements OnInit {
   editDish(id, amount, date) {
     this.api.editDish(date, id, amount.toString())
     .then(res => {
-      console.log(res)
+      console.log(res);
     });
   }
 }
