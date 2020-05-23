@@ -28,6 +28,7 @@ export class LoggedInComponent implements OnInit {
   logout() {
     this.snackBar.openSnackBar('Signing out...', 'Dismiss', 1000);
     this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
 }
