@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
 import { FoodComponent } from 'src/app/food/food/food.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
+import { timeInterval } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-food',
@@ -11,12 +12,13 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   styleUrls: ['./user-food.component.scss'],
   providers: [SnackBarComponent]
 })
-export class UserFoodComponent implements OnInit {
+export class UserFoodComponent implements OnInit, OnDestroy {
   breakpoint: number;
   height: number;
   userId: any;
   dishes: any;
   quantity: any;
+  pollingDish: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class UserFoodComponent implements OnInit {
         .getUserDishes(this.userId)
         .then((res) => {
           this.dishes = res.data;
+          this.updateDish();
         })
         .catch((err) => {
           this.snackbar.openSnackBar('Couldn\'t load dishes', 'Dismiss', 2000);
@@ -55,6 +58,22 @@ export class UserFoodComponent implements OnInit {
       this.breakpoint = 4;
       this.height = 500;
     }
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingDish);
+  }
+
+  updateDish() {
+    this.pollingDish = setInterval( () => {
+      this.api
+        .getUserDishes(this.userId)
+        .then((upRes) => {
+          this.dishes = upRes.data;
+        })
+        .catch((err) => {
+          this.snackbar.openSnackBar('Couldn\'t update dishes', 'Dismiss', 2000);
+        })
+    }, 30000);
   }
 
   onResize(event) {

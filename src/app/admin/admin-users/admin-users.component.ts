@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
@@ -12,7 +12,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./admin-users.component.css'],
   providers: [SnackBarComponent],
 })
-export class AdminUsersComponent implements OnInit {
+export class AdminUsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   loading = false;
@@ -30,6 +30,7 @@ export class AdminUsersComponent implements OnInit {
     'nickname',
     'email',
   ];
+  pollingAdminUsers: any;
 
   constructor(
     private userService: UserService,
@@ -51,6 +52,23 @@ export class AdminUsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(users.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.pollingAdminUsers = setInterval(() => {
+          this.userService
+            .getAll()
+            .then((upRes) => {
+              this.users = upRes.data;
+              this.dataSource = new MatTableDataSource(upRes.data);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+            .catch((err) => {
+              this.snackBar.openSnackBar(
+                'Error while updating users',
+                'Dismiss',
+                2000
+              );
+            });
+        }, 30000);
       })
       .catch((err) => {
         this.snackBar.openSnackBar(
@@ -60,6 +78,9 @@ export class AdminUsersComponent implements OnInit {
         );
         this.loading = false;
       });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingAdminUsers);
   }
   applyFilter(event: Event) {
     this.snackBar.openSnackBar(

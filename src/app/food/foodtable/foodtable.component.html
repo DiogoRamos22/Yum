@@ -3,12 +3,12 @@
 <div id="searchPreferences">
 
   <input matInput class="user-box mt-3 mb-3 my-btn p-2" style="width: 20%;"
-    (keyup)="applySearch($event)" [(ngModel)]="searchDish" placeholder="Search
+    (keyup)="applySearch()" [(ngModel)]="searchDish" placeholder="Search
     food" id="applySearch">
   <label id="example-radio-group-label">Type of Dish:</label>
   <mat-radio-group MatRadioChange aria-labelledby="example-radio-group-label"
     class="example-radio-group" [(ngModel)]="typeOfDishChosen"
-    (change)='applyFilter($event)'>
+    (change)='applyFilter()'>
     <mat-radio-button class="example-radio-button" *ngFor="let typeDish of
       typeDishes" [value]="typeDish">
       {{typeDish}}

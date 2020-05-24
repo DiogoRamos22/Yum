@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/_services/api.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,11 +10,12 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   styleUrls: ['./profile-food.component.scss'],
   providers: [SnackBarComponent]
 })
-export class ProfileFoodComponent implements OnInit {
+export class ProfileFoodComponent implements OnInit, OnDestroy {
   breakpoint: number;
   height: number;
   dishes: string[];
   quantity: string;
+  pollingProfileFood: any;
 
   constructor(private api: ApiService, public dialog: MatDialog, private snackBar: SnackBarComponent) {}
 
@@ -23,6 +24,20 @@ export class ProfileFoodComponent implements OnInit {
       .getUserDishes(JSON.parse(localStorage.getItem('currentUser')).id)
       .then((res) => {
         this.dishes = res.data;
+        this.pollingProfileFood = setInterval(() => {
+          this.api
+            .getUserDishes(JSON.parse(localStorage.getItem('currentUser')).id)
+            .then((upRes) => {
+              this.dishes = upRes.data;
+            })
+            .catch((err) => {
+              this.snackBar.openSnackBar(
+                'Error updating food',
+                'Dismiss',
+                2000
+              );
+            });
+        }, 30000);
       })
       .catch((err) => {
         this.snackBar.openSnackBar(
@@ -49,6 +64,9 @@ export class ProfileFoodComponent implements OnInit {
       this.breakpoint = 4;
       this.height = 500;
     }
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingProfileFood);
   }
 
   onResize(event) {

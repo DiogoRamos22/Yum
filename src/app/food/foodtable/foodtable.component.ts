@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/_services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FoodComponent } from '../food/food.component';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { filter } from 'rxjs/operators';
 
 export interface FoodData {
   created_at: string;
@@ -33,7 +34,7 @@ export interface FoodData {
   styleUrls: ['./foodtable.component.scss'],
   providers: [SnackBarComponent],
 })
-export class FoodtableComponent implements OnInit {
+export class FoodtableComponent implements OnInit, OnDestroy {
   search: string;
   breakpoint: number;
   height: number;
@@ -54,6 +55,7 @@ export class FoodtableComponent implements OnInit {
   foodId: string;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  pollingAllDish: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,11 +68,7 @@ export class FoodtableComponent implements OnInit {
     if (!this.auth.currentUserValue) {
       this.router.navigate(['/']);
     } else {
-      this.snackBar.openSnackBar(
-        'Loading dishes...',
-        'Dismiss',
-        2000
-      );
+      this.snackBar.openSnackBar('Loading dishes...', 'Dismiss', 2000);
       this.api
         .getAllDishes()
         .then((res) => {
@@ -105,6 +103,45 @@ export class FoodtableComponent implements OnInit {
 
             this.dishes = this.dataArray.filteredData;
           });
+          // Async
+          this.pollingAllDish = setInterval(() => {
+            this.api
+              .getAllDishes()
+              .then((upRes) => {
+                // tslint:disable-next-line: prefer-for-of
+                for (let i = 0; i < upRes.data.length; i++) {
+                  food[i] = this.convertData(upRes.data[i]);
+                }
+
+                this.dataArray = new MatTableDataSource(food);
+                this.dataArray.filterPredicate = (
+                  data: FoodData,
+                  filters: string
+                ) => {
+                  const matchFilter = [];
+                  const filterArray = filters.split('+');
+                  const columns = (Object as any).values(data);
+                  filterArray.forEach((filter) => {
+                    const customFilter = [];
+                    columns.forEach((column) => {
+                      customFilter.push(column.toLowerCase().includes(filter));
+                    });
+                    matchFilter.push(customFilter.some(Boolean));
+                  });
+                  return matchFilter.every(Boolean); // both filters to use only all of the filters use every instead of some
+                };
+                this.dataArray.paginator = this.paginator;
+                this.dataArray.sort = this.sort;
+                this.applyFilter();
+              })
+              .catch((err) => {
+                this.snackBar.openSnackBar(
+                  'Error while updating dishes',
+                  'Dismiss',
+                  2000
+                );
+              });
+          }, 30000);
         })
         .catch((err) => {
           this.snackBar.openSnackBar(
@@ -135,7 +172,7 @@ export class FoodtableComponent implements OnInit {
       updated_at: data.updated_at,
       userId: data.userId,
       firstName: data.firstName,
-      lastName: data.lastName,
+      lastName: data.lastName
     };
   }
 
@@ -157,6 +194,10 @@ export class FoodtableComponent implements OnInit {
       this.breakpoint = 4;
       this.height = 500;
     }
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingAllDish);
   }
 
   onResize(event) {
@@ -220,22 +261,21 @@ export class FoodtableComponent implements OnInit {
       this.dishes = this.dataArray.filteredData;
     }
   }
-  applySearch(event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applySearch() {
     if (this.typeOfDishChosen === undefined) {
-      this.dataArray.filter = filterValue.trim().toLowerCase();
+      this.dataArray.filter = this.searchDish.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
-    } else if (filterValue === '' && this.typeOfDishChosen === 'All') {
+    } else if (this.searchDish === '' && this.typeOfDishChosen === 'All') {
       this.dataArray.filter = '';
       this.dishes = this.dataArray.filteredData;
     } else if (this.typeOfDishChosen === 'All') {
-      this.dataArray.filter = filterValue.trim().toLowerCase();
+      this.dataArray.filter = this.searchDish.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
     } else {
       this.dataArray.filter =
         this.typeOfDishChosen.trim().toLowerCase() +
         '+' +
-        filterValue.trim().toLowerCase();
+        this.searchDish.trim().toLowerCase();
       this.dishes = this.dataArray.filteredData;
     }
   }

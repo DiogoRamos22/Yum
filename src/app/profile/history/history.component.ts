@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,7 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   styleUrls: ['./history.component.css'],
   providers: [SnackBarComponent]
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   loading = false;
@@ -38,6 +38,7 @@ export class HistoryComponent implements OnInit {
     'rate',
   ];
   points: any;
+  pollingHistory: any;
 
   constructor(private api: ApiService, public dialog: MatDialog, private snackBar: SnackBarComponent) {}
 
@@ -51,6 +52,25 @@ export class HistoryComponent implements OnInit {
         this.dataSource = new MatTableDataSource(history.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        this.pollingHistory = setInterval(() => {
+          this.api
+            .GetHistoryCurrentUser()
+            .then((upRes) => {
+              this.history = upRes.data;
+              this.dataSource = new MatTableDataSource(upRes.data);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+            .catch((err) => {
+              this.snackBar.openSnackBar(
+                'Something went wrong... Reload the page or Login again',
+                'Dismiss',
+                2000
+              );
+            });
+        }, 30000);
+
       })
       .catch((err) => {
         this.loading = false;
@@ -60,6 +80,9 @@ export class HistoryComponent implements OnInit {
           2000
         );
       });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingHistory);
   }
   rate(dishId) {
     const dialogRef = this.dialog.open(RateDialogComponent, {

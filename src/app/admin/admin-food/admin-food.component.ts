@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,7 +11,7 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   styleUrls: ['./admin-food.component.css'],
   providers: [SnackBarComponent],
 })
-export class AdminFoodComponent implements OnInit {
+export class AdminFoodComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     'id',
     'name',
@@ -33,6 +33,7 @@ export class AdminFoodComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  pollingAdminFood: any;
 
   constructor(private api: ApiService, private snackBar: SnackBarComponent) {
     // Assign the data to the data source for the table to render
@@ -50,6 +51,22 @@ export class AdminFoodComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.pollingAdminFood = setInterval(() => {
+          this.api
+            .getAllDishes()
+            .then((upRes) => {
+              this.dataSource = new MatTableDataSource(upRes.data);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+            .catch((err) => {
+              this.snackBar.openSnackBar(
+                'Error while updating dishes',
+                'Dismiss',
+                2000
+              );
+            });
+        }, 30000);
       })
       .catch((err) => {
         this.snackBar.openSnackBar(
@@ -58,6 +75,9 @@ export class AdminFoodComponent implements OnInit {
           2000
         );
       });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingAdminFood);
   }
   applyFilter(event: Event) {
     this.snackBar.openSnackBar(

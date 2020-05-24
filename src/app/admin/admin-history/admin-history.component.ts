@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,7 +11,7 @@ import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
   styleUrls: ['./admin-history.component.css'],
   providers: [SnackBarComponent],
 })
-export class AdminHistoryComponent implements OnInit {
+export class AdminHistoryComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   loading = false;
@@ -34,6 +34,7 @@ export class AdminHistoryComponent implements OnInit {
     'amountPaid',
     'created_at',
   ];
+  pollingAdminHistory: any;
 
   constructor(private api: ApiService, private snackBar: SnackBarComponent) {}
 
@@ -52,6 +53,23 @@ export class AdminHistoryComponent implements OnInit {
         this.dataSource = new MatTableDataSource(history.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.pollingAdminHistory = setInterval(() => {
+          this.api
+            .GetAllHistory()
+            .then((upRes) => {
+              this.history = upRes.data;
+              this.dataSource = new MatTableDataSource(upRes.data);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+            .catch((res) => {
+              this.snackBar.openSnackBar(
+                'Error while updating history',
+                'Dismiss',
+                2000
+              );
+            })
+        }, 30000);
       })
       .catch((err) => {
         this.snackBar.openSnackBar(
@@ -60,8 +78,10 @@ export class AdminHistoryComponent implements OnInit {
           2000
         );
         this.loading = false;
-        console.log(err);
       });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.pollingAdminHistory);
   }
   applyFilter(event: Event) {
     this.snackBar.openSnackBar('Filtering...', 'Dismiss', 500);
