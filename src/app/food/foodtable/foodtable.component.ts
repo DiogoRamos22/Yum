@@ -86,6 +86,7 @@ export class FoodtableComponent implements OnInit, OnDestroy {
             const matchFilter = [];
             const filterArray = filters.split('+');
             const columns = (Object as any).values(data);
+            // tslint:disable-next-line: no-shadowed-variable
             filterArray.forEach((filter) => {
               const customFilter = [];
               columns.forEach((column) => {
@@ -121,6 +122,7 @@ export class FoodtableComponent implements OnInit, OnDestroy {
                   const matchFilter = [];
                   const filterArray = filters.split('+');
                   const columns = (Object as any).values(data);
+                  // tslint:disable-next-line: no-shadowed-variable
                   filterArray.forEach((filter) => {
                     const customFilter = [];
                     columns.forEach((column) => {

@@ -72,7 +72,7 @@ export class UserFoodComponent implements OnInit, OnDestroy {
         })
         .catch((err) => {
           this.snackbar.openSnackBar('Couldn\'t update dishes', 'Dismiss', 2000);
-        })
+        });
     }, 30000);
   }
 

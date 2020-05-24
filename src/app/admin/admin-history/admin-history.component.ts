@@ -68,7 +68,7 @@ export class AdminHistoryComponent implements OnInit, OnDestroy {
                 'Dismiss',
                 2000
               );
-            })
+            });
         }, 30000);
       })
       .catch((err) => {
