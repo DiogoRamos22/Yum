@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
-<div id="parent">
+<div id="add-dish-form">
   <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form
     class="container">
-    <h3 class="mt-5" id="formName"><hr/>Add your dish<hr/></h3>
+    <h3 class="mt-5" id="form-name"><hr/>Add your dish<hr/></h3>
 
         <div>
           <label>
-            Dish Name:
+            Dish Name:<br>
             <input type="text" formControlName="name">
           </label>
         </div>
@@ -19,51 +19,39 @@
               Food type:
             </label>
             <select formControlName="type">
-              <option>
-                Pizza
-              </option>
-              <option>
-                Sushi
-              </option>
-              <option>
-                Fast Food
-              </option>
-              <option>
-                Desserts
-              </option>
-              <option>
-                Healthy
-              </option>
-              <option>
-                Traditional
-              </option>
+              <option>Pizza</option>
+              <option>Sushi</option>
+              <option>Fast Food</option>
+              <option>Desserts</option>
+              <option>Healthy</option>
+              <option>Traditional</option>
             </select>
           </span>
 
         </div>
         <div>
           <label>
-            Ingredients:
+            Ingredients: <br>
             <input type="text" formControlName="ingredients">
           </label>
         </div>
         <div>
           <label>
-            Number of dishes:
-          </label>
+            Number of dishes: <br>
+          </label> <br>
           <input type="number" formControlName="number">
         </div>
         <div>
           <label>
-            Date:
+            Date:<br>
             <input type="date" formControlName="date">
           </label>
         </div>
         <div>
           <label>
-            Price:
+            Price:<br>
             <input type="number" formControlName="price">
-          </label>
+          </label> <br>
         </div>
         <div id="butao">
           <button type="submit" [disabled]="!newdishForm.valid">Add dish</button>

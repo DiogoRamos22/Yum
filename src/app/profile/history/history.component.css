@@ -5,7 +5,12 @@ table {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
+  margin-top: 1%; /* para quando se carrega na barra nao ficar
+  com o filter colado à parte de cima */
+  background-image: linear-gradient(white, rgb(220, 216, 216));
+  /*se nao gostares do degrade tira*/
 }
+
 .my-button {
   background-color: #BB3127;
   border-radius: 24px;

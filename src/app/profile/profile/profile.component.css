@@ -1,4 +1,31 @@
+
 .profile-img-height {
   height: 200px;
   width: auto;
+}
+
+.card-img-top{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem  ;
+}
+
+#choose-file-button > *{
+  padding-left: 17%; 
+  /* fica alinhado à esquerda com a foto*/
+}
+
+#money-list-item > *{
+  margin-top: -4px;
+  /* texto ficar alinhado com o butão de addMoney*/
+  float: right;
+  /* butão de money ficar à direita do money*/
+
+}
+
+.card{
+  box-shadow: 0 .5rem 0.8rem rgba(0,0,0,.15)!important;
+  margin-top: 1rem!important;
+  margin-bottom: 3rem!important;
 }

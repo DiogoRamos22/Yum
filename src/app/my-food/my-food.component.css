@@ -1,27 +1,60 @@
+
+.container{
+   min-width: 350px;
+   max-width: 30%;
+   margin: auto;
+   padding-bottom: 1em;
+   border-radius: 4%;
+   box-shadow: 0 1.5rem 1.5rem rgba(0,0,0,.15)!important;
+}
+
+#form-name, #butao{
+   text-align: center;
+}
+
+.container > *{
+   margin-top: 1%;
+   margin-bottom: 1%;
+   text-align: center;
+}
+
+label{
+   align-items: center;
+   width: 100%;
+}
+
+#foto{
+   align-items: ;
+}
+
+
+/*
 #parent {
     display: table;
     width: 100%;
  }
-
-
-
+ 
  .container {
    margin: 0 auto; 
-   width:325px;
-   clear: both;
- }
- 
- .container input {
-   width: 300px;
-   clear: both;
-   
+   width:30%;
+   display: block;
  }
 
- #butao, #formName{
+ .container > *{
+    margin-top: 1%;
+    margin-bottom: 1%;
     text-align: center;
  }
 
- #foto{
-    margin-bottom: 8px;
+ #form-name, #butao{
+    text-align: center;
  }
- 
+
+ form {
+   display: inline-block;
+}
+
+input{
+   width: 100%;
+}
+*/
