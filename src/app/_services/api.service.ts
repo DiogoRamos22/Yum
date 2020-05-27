@@ -236,7 +236,7 @@ export class ApiService {
       Authorization: 'Bearer ' + token,
     };
 
-    return axios.post('/api/SendMessages', formData, this.config);
+    return axios.post('/api/SendMessage', formData, this.config);
   }
 
   getMessages(id) {

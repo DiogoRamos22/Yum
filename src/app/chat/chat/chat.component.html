@@ -1,39 +1,19 @@
-<div>
+<div id="chat">
   <div>
-    <h4>name</h4>
-    <button>close</button>
+    <h4 id = "name">name</h4>
+    <button (click)="Close()" >close</button>
   </div>
   <div>
-    <ul class="list-group pb-3">
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
-      <li>chat</li>
+    <ul id='chatList' class="list-group pb-3">
     </ul>
   </div>
   <div>
     <form class="form-row">
       <div class="form-group col-sm-10 mt-3">
-        <input class="user-box my-btn form-control" type="text" placeholder="Type a message">
+        <input #messageText id="messageText" class="user-box my-btn form-control" type="text" placeholder="Type a message">
       </div>
       <div class="form-group col-sm-2 mt-3">
-        <button class="button-box btn my-btn text-white" type="submit">Send</button>
+        <button (click)="SendMessage(messageText.value)" (click) = "messageText.value = ''" class="button-box btn my-btn text-white" type="submit">Send</button>
       </div>
     </form>
   </div>
