@@ -72,7 +72,6 @@ export class ChatHubComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
-
   }
 
   SendMessage(message) {
