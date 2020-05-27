@@ -226,6 +226,31 @@ export class ApiService {
     return axios.post('/api/rateDish', formData, this.config);
   }
 
+  sendMessage(id, message) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('idReceiver', id);
+    formData.append('message', message);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    };
+
+    return axios.post('/api/SendMessages', formData, this.config);
+  }
+
+  getMessages(id) {
+    const token = this.getToken();
+    const formData = new FormData();
+    formData.append('idReceiver', id);
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    };
+
+    return axios.post('/api/GetMessages', formData, this.config);
+  }
+
   getToken(): string {
     const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
     return currentUserLocal.token;

@@ -18,6 +18,11 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatRadioModule} from '@angular/material/radio';
+import { MatListModule } from '@angular/material/list';
+import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
@@ -48,6 +53,8 @@ import { UserRateDialogComponent } from './user/user-rate-dialog/user-rate-dialo
 import { UserComponent } from './user/user/user.component';
 import { UserFoodComponent } from './user/user-food/user-food.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BottomChatSheetComponent } from './chat/bottom-chat-sheet/bottom-chat-sheet.component';
+import { ChatComponent } from './chat/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +87,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     UserComponent,
     UserRateDialogComponent,
     UserFoodComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BottomChatSheetComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +108,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatTabsModule,
     MatInputModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule,
+    MatBottomSheetModule,
+    MatSidenavModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
