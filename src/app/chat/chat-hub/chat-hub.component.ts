@@ -58,7 +58,7 @@ export class ChatHubComponent implements OnInit {
       if (this.messages[i].idSender == id) {
         this.chatList += '<li>' + this.messages[i].message + '</li>';
       } else {
-        this.chatList += '<li style=text-align:right;>' + this.messages[i].message + '</li>';
+        this.chatList += '<li class="text-right">' + this.messages[i].message + '</li>';
       }
     }
   }
