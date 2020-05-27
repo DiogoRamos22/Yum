@@ -40,6 +40,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminFoodComponent } from './admin/admin-food/admin-food.component';
+
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
@@ -55,6 +56,7 @@ import { UserFoodComponent } from './user/user-food/user-food.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BottomChatSheetComponent } from './chat/bottom-chat-sheet/bottom-chat-sheet.component';
 import { ChatComponent } from './chat/chat/chat.component';
+import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { ChatComponent } from './chat/chat/chat.component';
     FoodComponent,
     AdminUsersComponent,
     AdminFoodComponent,
+
     MyFoodComponent,
     WalletComponent,
     DialogComponent,
@@ -89,7 +92,8 @@ import { ChatComponent } from './chat/chat/chat.component';
     UserFoodComponent,
     NotFoundComponent,
     BottomChatSheetComponent,
-    ChatComponent
+    ChatComponent,
+    AdminStatisticsComponent
   ],
   imports: [
     BrowserModule,
