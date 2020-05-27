@@ -1,0 +1,29 @@
+<app-nav-bar></app-nav-bar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav style="width: 200px;" opened mode="side">
+    <ul>
+      <li *ngFor="let chat of chatHub; let i = index" [attr.data-index]="i"><button (click)="ChangeChat(i)">{{chat}}</button></li>
+    </ul>
+  </mat-sidenav>
+  <div id="chat">
+    <div>
+      <h4 >{{name}}</h4>
+      <button class="button-box btn my-btn text-white" (click)="Close()">close</button>
+    </div>
+    <div>
+      <ul [innerHTML]='chatList' class="list-group pb-3">
+      </ul>
+    </div>
+    <div>
+      <form class="form-row">
+        <div class="form-group col-sm-10 mt-3">
+          <input #messageText id="messageText" class="user-box my-btn form-control" type="text" placeholder="Type a message">
+        </div>
+        <div class="form-group col-sm-2 mt-3">
+          <button (click)="SendMessage(messageText.value)" (click) = "messageText.value = ''" class="button-box btn my-btn text-white" type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</mat-sidenav-container>

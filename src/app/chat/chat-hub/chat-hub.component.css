@@ -1,0 +1,36 @@
+.example-container {
+  height: 89vh;
+}
+.list-group {
+  max-height: 400px;
+  overflow-y: scroll;
+
+}
+.my-btn{
+  border-radius: 24px 24px 24px 24px;
+  border: 0px;
+}
+.user-box{
+  /*border-width: 2px 2px 2px 0px !important;
+  border-style: solid !important;
+  border-color: #313131 !important;
+  box-shadow: inset !important;*/
+  background-color: rgb(247, 244, 243);
+}
+.user-box:focus{
+  background-color: rgb(247, 244, 243) !important;
+}
+.button-box{
+  /*
+  border-width: 2px 2px 2px 2px;
+  border-style: solid;
+  border-color: #313131;*/
+  background-color: #BB3127;
+  font-weight: bold;
+}
+ul, li {
+  text-decoration: none;
+  list-style: none;
+
+}
+

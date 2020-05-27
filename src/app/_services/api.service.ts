@@ -251,6 +251,15 @@ export class ApiService {
     return axios.post('/api/GetMessages', formData, this.config);
   }
 
+  getActiveChats() {
+    const token = this.getToken();
+    this.config.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    };
+    return axios.get('/api/GetActiveChats', this.config);
+  }
+
   getToken(): string {
     const currentUserLocal = JSON.parse(localStorage.getItem('currentUser'));
     return currentUserLocal.token;

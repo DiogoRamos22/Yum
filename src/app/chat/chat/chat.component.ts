@@ -12,17 +12,21 @@ export class ChatComponent implements OnInit {
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    public api: ApiService, @Inject(MAT_BOTTOM_SHEET_DATA) public messages: any,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public chatList: any, ) { }
+    public api: ApiService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public messages: any,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public chatList: any) { }
 
-  ngOnInit(): void {    
-    document.getElementById('name').innerText=this.data.firstName + ' ' + this.data.lastName;
-    console.log(this.data);
-    this.chatList = document.getElementById("chatList");
+  ngOnInit(): void {
+    document.getElementById('name').innerText = this.data.firstName + ' ' + this.data.lastName;
+    console.log('chatlist: ' , this.chatList);
+    console.log('data' , this.data);
+    this.chatList = document.getElementById('chatList');
     this.GetMessages(this.data.id);
 
     var call = interval(3000)
-      .subscribe(() => { this.GetMessages(this.data.id) });
+      .subscribe(() => {
+        this.GetMessages(this.data.id)
+      });
   }
 
   UpdateMessages() {
@@ -30,10 +34,9 @@ export class ChatComponent implements OnInit {
     this.chatList.innerHTML = '';
     for (let i in this.messages) {
       if (this.messages[i].idSender == this.data.id) {
-        this.chatList.insertAdjacentHTML('beforeend', '<li>'+ this.messages[i].message +'</li>');
-      }
-      else {
-        this.chatList.insertAdjacentHTML('beforeend', '<li style=text-align:right;>'+ this.messages[i].message +'</li>');
+        this.chatList.insertAdjacentHTML('beforeend', '<li>' + this.messages[i].message + '</li>');
+      } else {
+        this.chatList.insertAdjacentHTML('beforeend', '<li style=text-align:right;>' + this.messages[i].message + '</li>');
       }
     }
   }
@@ -51,18 +54,18 @@ export class ChatComponent implements OnInit {
 
   SendMessage(message) {
     console.log(message);
-    document.getElementById('messageText').innerText ="epic";
+    document.getElementById('messageText').innerText ='epic';
     this.api.sendMessage(this.data.id, message)
       .then((res) => {
         this.GetMessages(this.data.id);
-        console.log("deu");
+        console.log('deu');
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  Close(){
+  Close() {
     document.getElementById('chat').innerHTML = '';
   }
 

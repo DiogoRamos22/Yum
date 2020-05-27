@@ -11,6 +11,7 @@ import { FoodtableComponent } from './food/foodtable/foodtable.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 import { UserComponent } from './user/user/user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChatHubComponent } from './chat/chat-hub/chat-hub.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'food', component: FoodtableComponent},
   {path: 'myfood', component: MyFoodComponent},
   {path: 'user/:userId', component: UserComponent},
+  {path: 'chat', component: ChatHubComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];

@@ -1,11 +1,15 @@
 <div *ngIf="isVendor; then vendor"></div>
 <ng-template #vendor>
-  <li class="nav-item m-1 ml-auto">
+  <li class="nav-item m-1 ml-2 mr-auto">
     <button class="btn shadow my-bg-secondary my-btn text-white p-2 pl-3 pr-3"
       type="button" routerLink="/myfood">MyFood</button>
   </li>
 </ng-template>
-<li class="nav-item m-1 ml-2 mr-auto ml-auto">
+<li class="nav-item m-1 ml-2 mr-auto">
+  <button class="btn shadow my-bg-secondary my-btn text-white p-2 pl-3 pr-3"
+    type="button" routerLink="/chat">Chat</button>
+</li>
+<li class="nav-item m-1 ml-2 mr-auto">
   <button class="btn shadow my-bg-secondary my-btn text-white p-2 pl-3 pr-3"
     type="button" routerLink="/profile">Profile</button>
 </li>

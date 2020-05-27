@@ -55,6 +55,7 @@ import { UserFoodComponent } from './user/user-food/user-food.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BottomChatSheetComponent } from './chat/bottom-chat-sheet/bottom-chat-sheet.component';
 import { ChatComponent } from './chat/chat/chat.component';
+import { ChatHubComponent } from './chat/chat-hub/chat-hub.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ChatComponent } from './chat/chat/chat.component';
     UserFoodComponent,
     NotFoundComponent,
     BottomChatSheetComponent,
-    ChatComponent
+    ChatComponent,
+    ChatHubComponent
   ],
   imports: [
     BrowserModule,
