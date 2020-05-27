@@ -10,6 +10,8 @@ import { interval } from 'rxjs';
 })
 export class ChatComponent implements OnInit {
 
+  pollingCall: any;
+
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     public api: ApiService,
@@ -23,10 +25,11 @@ export class ChatComponent implements OnInit {
     this.chatList = document.getElementById('chatList');
     this.GetMessages(this.data.id);
 
-    var call = interval(3000)
+    this.pollingCall = interval(3000)
       .subscribe(() => {
         this.GetMessages(this.data.id)
       });
+
   }
 
   UpdateMessages() {
@@ -39,6 +42,7 @@ export class ChatComponent implements OnInit {
         this.chatList.insertAdjacentHTML('beforeend', '<li style=text-align:right;>' + this.messages[i].message + '</li>');
       }
     }
+    this.chatList.lastChild.scrollIntoView();
   }
 
   GetMessages(id) {
@@ -58,7 +62,6 @@ export class ChatComponent implements OnInit {
     this.api.sendMessage(this.data.id, message)
       .then((res) => {
         this.GetMessages(this.data.id);
-        console.log('deu');
       })
       .catch((err) => {
         console.log(err);
@@ -67,6 +70,7 @@ export class ChatComponent implements OnInit {
 
   Close() {
     document.getElementById('chat').innerHTML = '';
+    this.pollingCall.unsubscribe();
   }
 
 
