@@ -20,7 +20,7 @@ export class ChatHubComponent implements OnInit {
   id: any;
 
 
-  constructor(private api: ApiService, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.api
