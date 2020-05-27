@@ -2,7 +2,7 @@
   height: 89vh;
 }
 .list-group {
-  max-height: 400px;
+  max-height: auto;
   overflow-y: scroll;
 
 }
@@ -53,4 +53,24 @@ ul, li {
   height: 100%;
   overflow: hidden!important;
 }
+.border{
+  width: 101%; /* trust me */
+}
 
+
+
+#chat{
+  width: 99%; /*just trust me man */
+}
+#messageText{
+  margin-left: 1%;
+}
+
+.button-box{
+  margin-left: 5px;
+}
+
+.form-row{
+  background-color: rgb(138, 138, 138);
+  border-radius: 10px;
+}
