@@ -1,24 +1,29 @@
 <app-nav-bar></app-nav-bar>
 <div id="add-dish-form">
-  <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form
-    class="container">
-    <h3 class="mt-5" id="form-name"><hr/>Add your dish<hr/></h3>
+  <h2 class="mt-5 roboto col-sm-12" id="form-name">Add your dish</h2>
+  <div class="container my-container border mt-4 mb-4 p-3 pb-4 pt-3 my-btn my-shadow">
+    <form [formGroup]="newdishForm" (ngSubmit)="onSubmit()" id=newdish_form
+      class="form-row justify-content-center p-3">
 
-        <div>
-          <label>
-            Dish Name:<br>
-            <input type="text" formControlName="name">
-          </label>
-        </div>
-        <div id="foto">
-          <input type="file" (change)="onFileSelected($event)">
-        </div>
-        <div>
-          <span>
-            <label>
-              Food type:
+          <div class="col-sm-6 mt-3">
+            <label class="roboto">
+              Dish Name
+              <input class="my-btn form-control user-box" type="text" formControlName="name">
             </label>
-            <select formControlName="type">
+          </div>
+          <div class="col-sm-1 mt-3"></div>
+          <div class="col-sm-4 align-self-end mt-3" id="foto">
+            <input style="display:none;" id="fileFood" type="file" (change)="onFileSelected($event)">
+            <label class="button-box btn my-btn text-white p-2-5" for="fileFood">Choose Image</label>
+          </div>
+          <div class="col-sm-1 mt-3"></div>
+          <div class="col-sm-3 mt-4">
+            <span>
+              <label for="typeFood" class="roboto">
+                Food type
+              </label>
+              <select id="typeFood" formControlName="type" class="user-box my-btn
+              form-control">
               <option>Pizza</option>
               <option>Sushi</option>
               <option>Fast Food</option>
@@ -26,35 +31,36 @@
               <option>Healthy</option>
               <option>Traditional</option>
             </select>
-          </span>
+            </span>
 
-        </div>
-        <div>
-          <label>
-            Ingredients: <br>
-            <input type="text" formControlName="ingredients">
-          </label>
-        </div>
-        <div>
-          <label>
-            Number of dishes: <br>
-          </label> <br>
-          <input type="number" formControlName="number">
-        </div>
-        <div>
-          <label>
-            Date:<br>
-            <input type="date" formControlName="date">
-          </label>
-        </div>
-        <div>
-          <label>
-            Price:<br>
-            <input type="number" formControlName="price">
-          </label> <br>
-        </div>
-        <div id="butao">
-          <button type="submit" [disabled]="!newdishForm.valid">Add dish</button>
-        </div>
-      </form>
+          </div>
+          <div class="col-sm-9 mt-4">
+            <label for="ingredients" class="roboto">
+              Ingredients
+            </label>
+              <input id="ingredients" class="my-btn form-control user-box" type="text" formControlName="ingredients">
+          </div>
+          <div class="col-sm-3 mt-4">
+            <label class="roboto">
+              Nº of dishes
+            </label>
+              <input class="my-btn form-control user-box" type="number" formControlName="number">
+          </div>
+          <div class="col-sm-5 mt-4">
+            <label class="roboto">
+              Date
+            </label>
+              <input class="my-btn form-control user-box" type="date" formControlName="date">
+          </div>
+          <div class="col-sm-4 mt-4">
+            <label class="roboto">
+              Price
+            </label>
+              <input class="my-btn form-control user-box" type="number" formControlName="price">
+          </div>
+          <div class="col-sm-12 mt-5" id="butao">
+            <button class="button-box btn my-btn text-white p-2-5" type="submit" [disabled]="!newdishForm.valid">Add dish</button>
+          </div>
+        </form>
+  </div>
     </div>

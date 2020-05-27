@@ -22,7 +22,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
@@ -40,7 +39,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminFoodComponent } from './admin/admin-food/admin-food.component';
-
+import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { MyFoodComponent } from './my-food/my-food.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
@@ -56,7 +55,7 @@ import { UserFoodComponent } from './user/user-food/user-food.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BottomChatSheetComponent } from './chat/bottom-chat-sheet/bottom-chat-sheet.component';
 import { ChatComponent } from './chat/chat/chat.component';
-import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
+import { ChatHubComponent } from './chat/chat-hub/chat-hub.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +77,7 @@ import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statist
     FoodComponent,
     AdminUsersComponent,
     AdminFoodComponent,
-
+    AdminStatisticsComponent,
     MyFoodComponent,
     WalletComponent,
     DialogComponent,
@@ -93,7 +92,7 @@ import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statist
     NotFoundComponent,
     BottomChatSheetComponent,
     ChatComponent,
-    AdminStatisticsComponent
+    ChatHubComponent
   ],
   imports: [
     BrowserModule,

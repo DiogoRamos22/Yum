@@ -1,20 +1,11 @@
 
-.container{
-   min-width: 350px;
-   max-width: 30%;
-   margin: auto;
-   padding-bottom: 1em;
-   border-radius: 4%;
-   box-shadow: 0 1.5rem 1.5rem rgba(0,0,0,.15)!important;
+.my-container{
+  min-width: 350px;
+  max-width: 40%;
+  margin: auto;
 }
 
 #form-name, #butao{
-   text-align: center;
-}
-
-.container > *{
-   margin-top: 1%;
-   margin-bottom: 1%;
    text-align: center;
 }
 
@@ -22,39 +13,46 @@ label{
    align-items: center;
    width: 100%;
 }
-
-#foto{
-   align-items: ;
+.user-card{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 90%;
+  flex-direction: column;
 }
-
-
-/*
-#parent {
-    display: table;
-    width: 100%;
- }
- 
- .container {
-   margin: 0 auto; 
-   width:30%;
-   display: block;
- }
-
- .container > *{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    text-align: center;
- }
-
- #form-name, #butao{
-    text-align: center;
- }
-
- form {
-   display: inline-block;
+.user-box{
+  background-color: rgb(247, 244, 243);
 }
-
-input{
-   width: 100%;
+.user-box:focus{
+  background-color: rgb(247, 244, 243) !important;
 }
-*/
+.button-box{
+  background-color: #BB3127;
+  font-weight: bold;
+}
+.icon-box{
+  border-width: 0px 0px 0px 0px ;
+  border-radius: 24px 0px 0px 24px;
+  background-color: rgb(247, 244, 243);
+}
+.fix-icon{
+  height: calc(1.5em + .75rem + 2px);
+}
+input, textarea {
+  outline: none;
+  box-shadow:none !important;
+}
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+.my-btn{
+  border-radius: 24px 24px 24px 24px;
+  border: 0px;
+}
+.my-shadow {
+  box-shadow: 0 .5rem 0.8rem rgba(0,0,0,.15)!important;
+}
+.p-2-5 {
+  padding: 0.75rem!important;
+}

@@ -1,0 +1,31 @@
+<app-nav-bar></app-nav-bar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav class="auto-scroll" style="width: 200px;" opened mode="side">
+    <div class="list-group auto-scroll">
+      <button *ngFor="let chat of chatHub; let i = index" [attr.data-index]="i" class="no-radius list-group-item btn my-bg-secondary text-white p-4
+        pl-3 pr-3 mb-1" (click)="ChangeChat(i)" type="button">{{chat}}</button>
+      </div>
+  </mat-sidenav>
+  <mat-content class="auto-scroll">
+    <div id="chat">
+      <div>
+        <h4 class="m-4">{{name}}</h4>
+      </div>
+      <div class="border">
+        <ul [innerHTML]='chatList' class="list-group pb-3 auto-scroll">
+        </ul>
+      </div>
+      <div>
+        <form class="form-row">
+          <div class="form-group col-sm-10 mt-3">
+            <input #messageText id="messageText" class="user-box my-btn form-control" type="text" placeholder="Type a message">
+          </div>
+          <div class="form-group col-sm-2 mt-3">
+            <button (click)="SendMessage(messageText.value)" (click) = "messageText.value = ''" class="button-box btn my-btn text-white" type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-content>
+
+</mat-sidenav-container>
