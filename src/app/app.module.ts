@@ -22,7 +22,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
