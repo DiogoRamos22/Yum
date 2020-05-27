@@ -2,13 +2,13 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav style="width: 200px;" opened mode="side">
     <ul>
-      <li *ngFor="let chat of chatHub; let i = index" [attr.data-index]="i"><button (click)="ChangeChat(i)">{{chat}}</button></li>
+      <li *ngFor="let chat of chatHub; let i = index" [attr.data-index]="i"><button class="btn shadow my-bg-secondary my-btn text-white p-1
+        pl-3 pr-3" (click)="ChangeChat(i)">{{chat}}</button></li>
     </ul>
   </mat-sidenav>
   <div id="chat">
     <div>
       <h4 >{{name}}</h4>
-      <button class="button-box btn my-btn text-white" (click)="Close()">close</button>
     </div>
     <div>
       <ul [innerHTML]='chatList' class="list-group pb-3">

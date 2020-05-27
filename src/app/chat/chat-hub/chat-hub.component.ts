@@ -95,8 +95,4 @@ export class ChatHubComponent implements OnInit {
           this.GetMessages(this.id);
     });
   }
-
-  Close(){
-    document.getElementById('chat').innerHTML = '';
-  }
 }
