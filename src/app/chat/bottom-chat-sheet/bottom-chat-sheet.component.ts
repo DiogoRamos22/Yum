@@ -27,9 +27,6 @@ export class BottomChatSheetComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.id = params.userId;
-    });
   }
   ngOnChanges(changes: SimpleChanges) {
     this.route.params.subscribe((params) => {
